@@ -1,1 +1,3 @@
-# Algorithms and datastructures project
+# Mazesolver
+
+Algorithms and datastructures project.
