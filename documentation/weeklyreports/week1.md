@@ -3,6 +3,7 @@
 Time spent:  7 hours. 
 
 ## What I did
+- Wrote the [project definiton](https://github.com/lehtoneo/Mazesolver/blob/master/documentation/project_definition.md)
 - Read the course page material
 - Set up the project
 - Designed the project structure a bit
