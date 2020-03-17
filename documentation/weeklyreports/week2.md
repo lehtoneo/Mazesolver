@@ -1,4 +1,4 @@
-#Week 2
+# Week 2
 
 ## What I did
 - Changed the project definition
