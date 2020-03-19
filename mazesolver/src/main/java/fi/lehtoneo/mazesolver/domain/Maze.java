@@ -6,8 +6,7 @@
 package fi.lehtoneo.mazesolver.domain;
 
 /**
- *
- * @author ossij
+ * Class to represent maze
  */
 public class Maze {
     
@@ -18,44 +17,39 @@ public class Maze {
     private int[][] end;
     
     
-    //test maze
-    public Maze () {
+    public Maze(char[][] g) {
+        this.grid = g;
         
-        char[][] t = {{'#','#','#','#','#','#','#'},
-              {'#','x','#','.','y','.','#'},
-              {'#','z','.','.','#','#','#'},
-              {'#','.','.','.','.','.','#'},
-              {'#','#','#','#','#','#','#'}};
-        
-        this.rows = t.length;
-        this.columns = t[0].length;
-        System.out.println("rows " + this.rows);
-        System.out.println("colums " + this.columns);
-        this.grid = t;
+        this.rows = g.length;
+        this.columns = g[0].length;
     }
     
-    public Maze (int rows, int columns) {
+    
+    
+    public Maze(int rows, int columns) {
         
         this.rows = rows;
         this.columns = columns;
         this.grid = new char[rows][columns];
-        this.start = new int[1][1];
-        this.end = new int[1][1];
         
         init();
     }
     
 
-    
+    /*
+    *
+    * Returns maze as string
+    */
+    @Override
     public String toString() {
         String toReturn = "";
         
-        for(int x = 0; x < this.rows; x++) {
-            if(x != 0){
+        for (int x = 0; x < this.rows; x++) {
+            if (x != 0) {
                 toReturn += "\n";
             }
-            for(int y = 0; y < this.columns; y++) {
-                System.out.println("x: " + x + "y: " + y);
+            for (int y = 0; y < this.columns; y++) {
+                
                 toReturn += this.grid[x][y];
             }
         }
@@ -69,12 +63,14 @@ public class Maze {
     
     
     
-    
+    /*
+    * Creates outerwalls to maze and inserts everything else as path
+    */
     private void init() {
         
-        for(int i = 0; i  < this.rows; i++) {
+        for (int i = 0; i  < this.rows; i++) {
             for (int j = 0; j < this.columns; j++) {
-                if(i == 0 || i ==  this.rows - 1|| j == 0 || j == this.columns - 1) {
+                if (i == 0 || i ==  this.rows - 1 || j == 0 || j == this.columns - 1) {
                     this.grid[i][j] = '#';
                 } else {
                     this.grid[i][j] = '.';
