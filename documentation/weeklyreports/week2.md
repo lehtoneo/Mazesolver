@@ -15,5 +15,5 @@ Hours spent: ~10
 
 ## What I will do next week
 - Implement shortest path algorith to find paths in the maze
-- Implement a LinkedList
+- Implement a list data structure
 - Continue documentation
