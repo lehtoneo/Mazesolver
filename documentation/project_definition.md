@@ -19,7 +19,7 @@ If there is time, more algorithms will be added.
 
 For Prim's algorithm, a list needs to be implemented.
 
-For shortest path algorithm, a stack needs to be implemented. 
+For shortest path algorithm, a queue needs to be implemented. 
 
 There might be other datastructures that need to be implemented. They will be added here.
 
