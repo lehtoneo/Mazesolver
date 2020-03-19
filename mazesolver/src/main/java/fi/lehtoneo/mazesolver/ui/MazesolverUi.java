@@ -1,8 +1,12 @@
 package fi.lehtoneo.mazesolver.ui;
 
-import fi.lehtoneo.mazesolver.domain.Maze;
+import fi.lehtoneo.mazesolver.domain.*;
+import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MazesolverUi extends Application {
@@ -10,15 +14,14 @@ public class MazesolverUi extends Application {
     
     
     @Override
-    public void start(Stage stage) {
-        
+    public void start(Stage stage) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/start.fxml"));
         stage.setTitle("test");
+        stage.setScene(new Scene(root));
         stage.show();
     }
     
     public static void main(String[] args) {
-        Maze m = new Maze();
-        System.out.println(m.toString());
         launch(args);
     }
 }
