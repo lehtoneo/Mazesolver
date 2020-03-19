@@ -17,7 +17,7 @@ If there is time, more algorithms will be added.
 
 ## Datastructures
 
-For Prim's algorithm, some list structure that supports quick addition and removing needs to be implemented. Possibly a linked list.
+For Prim's algorithm, a list needs to be implemented.
 
 For shortest path algorithm, a queue needs to be implemented. 
 
