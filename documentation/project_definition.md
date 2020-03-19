@@ -17,9 +17,9 @@ If there is time, more algorithms will be added.
 
 ## Datastructures
 
-For Prim's algorithm, atleast a linkedlist needs to be implemented. 
+For Prim's algorithm, some list structure that supports quick addition and removing needs to be implemented. Possibly a linked list.
 
-For shortest path algorithm, a queue needs to be implemented which will be used for BFS queue. 
+For shortest path algorithm, a queue needs to be implemented. 
 
 There might be other datastructures that need to be implemented. They will be added here.
 
