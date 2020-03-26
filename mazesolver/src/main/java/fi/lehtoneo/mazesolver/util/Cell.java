@@ -21,6 +21,12 @@ public class Cell {
         return column;
     }
     
+    public boolean equals(Cell c) {
+        
+        return (this.row == c.getRow() && this.column == c.getColumn());
+        
+    }
+    
     
     
     

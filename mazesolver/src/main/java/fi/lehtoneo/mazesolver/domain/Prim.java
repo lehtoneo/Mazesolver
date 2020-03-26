@@ -2,6 +2,7 @@ package fi.lehtoneo.mazesolver.domain;
 
 
 import fi.lehtoneo.mazesolver.util.Cell;
+import fi.lehtoneo.mazesolver.util.LinkedList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -24,12 +25,27 @@ public class Prim {
      * Prim's algorithm to generate a "perfect" maze
      */
     public void generate() {
-        List<Cell> frontiers = new ArrayList<>();
+        LinkedList<Cell> frontiers = new LinkedList<>();
+        
         Random random = new Random();
-        this.grid[1][3] = '.';
-        frontiers.add(new Cell(1, 5));
-        frontiers.add(new Cell(3, 3));
-        frontiers.add(new Cell(1, 1));
+        int rX = random.nextInt(grid.length - 2) + 1;
+        int rY = random.nextInt(grid[0].length - 2) + 1;
+        
+        grid[rX][rY] = '.';
+        if (rX - 2 >= 1) {
+            frontiers.add(new Cell(rX - 2, rY));
+        }
+        if (rX + 2 < grid.length - 1) {
+            frontiers.add(new Cell(rX + 2, rY));
+        }
+        
+        if (rY - 2 >= 1) {
+            frontiers.add(new Cell(rX, rY - 2));
+        }
+        
+        if (rY + 2 < grid[0].length - 1) {
+            frontiers.add(new Cell(rX, rY + 2));
+        }
         
         while (frontiers.size() > 0) {
             

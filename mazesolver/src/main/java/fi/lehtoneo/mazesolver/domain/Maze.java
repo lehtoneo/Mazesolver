@@ -13,8 +13,6 @@ public class Maze {
     private int columns;
     private int rows;
     private char[][] grid;
-    private int[][] start;
-    private int[][] end;
     
     
     public Maze(char[][] g) {
@@ -44,11 +42,11 @@ public class Maze {
     public String toString() {
         String toReturn = "";
         
-        for (int x = 0; x < this.rows; x++) {
+        for (int x = 0; x < this.grid.length; x++) {
             if (x != 0) {
                 toReturn += "\n";
             }
-            for (int y = 0; y < this.columns; y++) {
+            for (int y = 0; y < this.grid[0].length; y++) {
                 
                 toReturn += this.grid[x][y];
             }
@@ -56,6 +54,13 @@ public class Maze {
         
         return toReturn;
     }
+
+    public void setGrid(char[][] grid) {
+        this.grid = grid;
+    }
+    
+    
+    
     
     public char[][] getGrid() {
         return this.grid;
