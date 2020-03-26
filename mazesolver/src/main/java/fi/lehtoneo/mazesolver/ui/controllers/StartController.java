@@ -19,11 +19,12 @@ import javafx.stage.Stage;
  */
 public class StartController implements Initializable {
     
-    @FXML
-    private TextField height;
     
     @FXML
-    private TextField width;
+    private TextField n;
+    
+    
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -36,8 +37,7 @@ public class StartController implements Initializable {
         
         
         try {
-            Integer.valueOf(height.getText());
-            Integer.valueOf(width.getText());
+            Integer.valueOf(n.getText());
 
             
         } catch (Exception e) {
@@ -50,9 +50,9 @@ public class StartController implements Initializable {
         
         ShowMazeController controller = loader.<ShowMazeController>getController();
         
-        controller.initGridToPrimMaze(Integer.valueOf(height.getText()), Integer.valueOf(height.getText()));
+        controller.initGridToPrimMaze(Integer.valueOf(n.getText()), Integer.valueOf(n.getText()));
         
-        Stage stage = (Stage) height.getScene().getWindow();
+        Stage stage = (Stage) n.getScene().getWindow();
         
         stage.setScene(new Scene(root));
         
