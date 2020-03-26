@@ -1,7 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-mazesolver,fi.lehtoneo.mazesolver.util,Cell,2,27,2,2,1,8,2,4,0,4
-mazesolver,fi.lehtoneo.mazesolver.util,LinkedList,8,163,2,16,2,53,2,14,0,7
-mazesolver,fi.lehtoneo.mazesolver.util,Node,0,9,0,0,0,4,0,1,0,1
-mazesolver,fi.lehtoneo.mazesolver.domain,Maze,4,132,0,18,2,25,1,14,1,5
-mazesolver,fi.lehtoneo.mazesolver.domain,Wallfollower,0,407,0,34,0,65,0,20,0,3
-mazesolver,fi.lehtoneo.mazesolver.domain,Prim,1,466,1,55,1,67,1,31,0,4
