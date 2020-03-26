@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fi"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Maze.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mazesolver</a> &gt; <a href="index.source.html" class="el_package">fi.lehtoneo.mazesolver.domain</a> &gt; <span class="el_source">Maze.java</span></div><h1>Maze.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package fi.lehtoneo.mazesolver.domain;
+
+/**
+ * Class to represent maze
+ */
+public class Maze {
+    
+    private int columns;
+    private int rows;
+    private char[][] grid;
+    
+    
+<span class="fc" id="L18">    public Maze(char[][] g) {</span>
+<span class="fc" id="L19">        this.grid = g;</span>
+        
+<span class="fc" id="L21">        this.rows = g.length;</span>
+<span class="fc" id="L22">        this.columns = g[0].length;</span>
+<span class="fc" id="L23">    }</span>
+    
+    
+    
+<span class="fc" id="L27">    public Maze(int rows, int columns) {</span>
+        
+<span class="fc" id="L29">        this.rows = rows;</span>
+<span class="fc" id="L30">        this.columns = columns;</span>
+<span class="fc" id="L31">        this.grid = new char[rows][columns];</span>
+        
+<span class="fc" id="L33">        init();</span>
+<span class="fc" id="L34">    }</span>
+    
+
+    /*
+    *
+    * Returns maze as string
+    */
+    @Override
+    public String toString() {
+<span class="fc" id="L43">        String toReturn = &quot;&quot;;</span>
+        
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        for (int x = 0; x &lt; this.grid.length; x++) {</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">            if (x != 0) {</span>
+<span class="fc" id="L47">                toReturn += &quot;\n&quot;;</span>
+            }
+<span class="fc bfc" id="L49" title="All 2 branches covered.">            for (int y = 0; y &lt; this.grid[0].length; y++) {</span>
+                
+<span class="fc" id="L51">                toReturn += this.grid[x][y];</span>
+            }
+        }
+        
+<span class="fc" id="L55">        return toReturn;</span>
+    }
+
+    public void setGrid(char[][] grid) {
+<span class="nc" id="L59">        this.grid = grid;</span>
+<span class="nc" id="L60">    }</span>
+    
+    
+    
+    
+    public char[][] getGrid() {
+<span class="fc" id="L66">        return this.grid;</span>
+    }
+    
+    
+    
+    /*
+    * Creates outerwalls to maze and inserts everything else as path
+    */
+    private void init() {
+        
+<span class="fc bfc" id="L76" title="All 2 branches covered.">        for (int i = 0; i  &lt; this.rows; i++) {</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">            for (int j = 0; j &lt; this.columns; j++) {</span>
+<span class="fc bfc" id="L78" title="All 8 branches covered.">                if (i == 0 || i ==  this.rows - 1 || j == 0 || j == this.columns - 1) {</span>
+<span class="fc" id="L79">                    this.grid[i][j] = '#';</span>
+                } else {
+<span class="fc" id="L81">                    this.grid[i][j] = '.';</span>
+                }
+            }
+        }
+        
+<span class="fc" id="L86">    }</span>
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
