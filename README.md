@@ -1,5 +1,7 @@
 # Mazesolver
 
+[![codecov](https://codecov.io/gh/lehtoneo/Mazesolver/branch/master/graph/badge.svg)](https://codecov.io/gh/lehtoneo/Mazesolver)
+
 Algorithms and datastructures project.
 
 ## Documentation
