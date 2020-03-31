@@ -1,7 +1,12 @@
-# Performance testing
+# Testing
+
+## Unit testing
 
 
-## Prim maze generation algorithm
+
+## Performance testing
+
+### Prim maze generation algorithm
 
 Performance tests were made so that 300 of each size maze were created. The time column shows the average time it took to create 
 certain size maze. 
