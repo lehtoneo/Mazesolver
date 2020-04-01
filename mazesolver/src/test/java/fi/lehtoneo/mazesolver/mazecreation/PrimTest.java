@@ -1,6 +1,8 @@
 
-package fi.lehtoneo.mazesolver.domain;
+package fi.lehtoneo.mazesolver.mazecreation;
 
+import fi.lehtoneo.mazesolver.mazecreation.Prim;
+import fi.lehtoneo.mazesolver.mazesolving.BFS;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -11,9 +13,11 @@ import org.junit.Before;
  */
 public class PrimTest {
     private Prim prim;
+    private Prim prim2;
     @Before
     public void setUp() {
         this.prim = new Prim(10,12);
+        this.prim2 = new Prim(21,21);
     }
     
     @Test
@@ -59,6 +63,24 @@ public class PrimTest {
         
         assertTrue(truth);
         
+    }
+    
+    @Test
+    public void theMazeIsPerfect() {
+        prim.generate();
+        int[] start = new int[2];
+        int[] end = new int[2];
+        
+            for(int j = 0; j < prim.grid.length; j++) {
+                if(prim.grid[3][j] == '.') {
+                    start[0] = 3;
+                    start[1] = j;
+                    break;
+                }
+            }
+        BFS bfs = new BFS(prim.getGrid(), start, end);
+        
+        assertTrue(bfs.everythingIsReachableInMaze());
     }
     
 }

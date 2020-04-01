@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.lehtoneo.mazesolver.domain;
+package fi.lehtoneo.mazesolver.mazesolving;
 
+import fi.lehtoneo.mazesolver.datastructures.ArrayList;
+import fi.lehtoneo.mazesolver.mazecreation.Maze;
+import fi.lehtoneo.mazesolver.mazecreation.Prim;
+import fi.lehtoneo.mazesolver.mazesolving.Wallfollower;
 import fi.lehtoneo.mazesolver.util.Cell;
-import java.util.ArrayList;
-import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
@@ -22,12 +24,12 @@ public class WallfollowerTest {
     Maze maze1;
     int[] start1 = new int[2];
     int[] end1 = new int[2];
-    List<Cell> routeList1;
+    ArrayList<Cell> routeList1;
     
     Maze maze2;
     int[] start2 = new int[2];
     int[] end2 = new int[2];
-    List<Cell> routeList2;
+    ArrayList<Cell> routeList2;
     
     
     
@@ -93,7 +95,7 @@ public class WallfollowerTest {
     @Test
     public void InSimpleMzewFPathIsExpected() {
         
-        List<Cell> routeShouldBe = new ArrayList<>();
+        ArrayList<Cell> routeShouldBe = new ArrayList();
         routeShouldBe.add(new Cell(1, 1));
         routeShouldBe.add(new Cell(2, 1));
         routeShouldBe.add(new Cell(3, 1));
@@ -122,9 +124,10 @@ public class WallfollowerTest {
         
         char h = '.';
         
-        for (Cell c: routeList2) {
-            assertEquals(maze2.getGrid()[c.getRow()][c.getColumn()], h);
+        for(int i = 0; i < routeList2.size(); i++) {
+            assertEquals(maze2.getGrid()[routeList2.get(i).getRow()][routeList2.get(i).getColumn()], h);
         }
+        
         
     }
     

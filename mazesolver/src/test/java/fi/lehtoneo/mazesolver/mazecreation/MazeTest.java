@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.lehtoneo.mazesolver.domain;
+package fi.lehtoneo.mazesolver.mazecreation;
 
 /**
  *
  * @author ossij
  */
 
+import fi.lehtoneo.mazesolver.mazecreation.Maze;
 import static org.junit.Assert.*;
 import org.junit.Test;
 

@@ -1,6 +1,7 @@
-package fi.lehtoneo.mazesolver.util;
+package fi.lehtoneo.mazesolver.datastructures;
 
-import fi.lehtoneo.mazesolver.util.LinkedList;
+import fi.lehtoneo.mazesolver.datastructures.LinkedList;
+import fi.lehtoneo.mazesolver.util.Cell;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -116,6 +117,22 @@ public class LinkedListTest {
         
         assertEquals(shouldBe, 2);
         assertEquals(testList.size(), 5);
+    }
+    
+    
+    @Test
+    public void popWorks() {
+        LinkedList<Cell> testList = new LinkedList<>();
+        
+        testList.add(new Cell(1,1));
+        testList.add(new Cell(1,2));
+        
+        Cell c = testList.pop();
+        
+        
+        
+        assertTrue(c.equals(new Cell(1,1)));
+        assertEquals(testList.size(), 1);
     }
         
 
