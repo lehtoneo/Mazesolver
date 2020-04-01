@@ -30,11 +30,7 @@ There might be other datastructures that need to be implemented. They will be ad
 ## Input and output
 
 If the user chooses to create an own maze, first the user has to give the maze size as input. After that, he/she has to select start point 
-and end point from the maze. If the user wants to, he/she can put walls to the maze. 
-
-If the user chooses that the maze creation algorithm should create the maze, the user should only give the maze size as an input.
-
-When the user starts clicks start, the shortest route from start to end is given and also the time it took for algorithm(s) 
+and end point from the maze. Aftert that, the user is shown the route which the algorithm found and the time it took for the algorithm 
 to find the route.
 
 ## Time and space complexity goals
