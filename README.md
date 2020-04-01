@@ -6,6 +6,7 @@ Algorithms and datastructures project.
 
 ## Documentation
 
-- [project definiton](https://github.com/lehtoneo/Mazesolver/blob/master/documentation/project_definition.md)
-
+- [Project definiton](https://github.com/lehtoneo/Mazesolver/blob/master/documentation/project_definition.md)
+- [Testing](https://github.com/lehtoneo/Mazesolver/blob/master/documentation/testing.md)
+- [Implementation](https://github.com/lehtoneo/Mazesolver/blob/master/documentation/implementationdocument.md)
 ## [Weekly reports](https://github.com/lehtoneo/Mazesolver/tree/master/documentation/weeklyreports)
