@@ -1,4 +1,6 @@
-package fi.lehtoneo.mazesolver.util;
+package fi.lehtoneo.mazesolver.datastructures;
+
+import fi.lehtoneo.mazesolver.util.Node;
 
 public class LinkedList<T> {
     
@@ -74,6 +76,13 @@ public class LinkedList<T> {
         
     }
     
+    public T pop() {
+        T toReturn = (T) first.value;
+        first = first.next;
+        size--;
+        return toReturn;
+    }
+    
     public void removeLast() {
         int j = 0;
         Node<T> curr = first;
@@ -111,6 +120,10 @@ public class LinkedList<T> {
     
     public int size() {
         return size;
+    }
+    
+    public boolean isEmpty() {
+        return size == 0;
     }
     
     

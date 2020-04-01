@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.lehtoneo.mazesolver.domain;
+package fi.lehtoneo.mazesolver.mazesolving;
 
+import fi.lehtoneo.mazesolver.datastructures.ArrayList;
 import fi.lehtoneo.mazesolver.util.Cell;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 
@@ -23,7 +22,7 @@ public class Wallfollower {
     int left;
     int up;
     
-    List<Cell> routeList;
+    ArrayList<Cell> routeList;
     
     private int gX;
     private int gY;
@@ -44,7 +43,7 @@ public class Wallfollower {
         left = 2;
         down = 3;
         
-        routeList = new ArrayList<>();
+        routeList = new ArrayList();
         
         x = start[0];
         y = start[1];
@@ -99,7 +98,6 @@ public class Wallfollower {
                     x++;
                 }
                 
-                // 0 right, 1 up, 2 left , 3 down
             } else if (direction == left) {
                 if (maze[x - 1][y] == '.') {
                     direction = up;
@@ -136,7 +134,7 @@ public class Wallfollower {
         
     }
     
-    public List<Cell> getRouteList() {
+    public ArrayList<Cell> getRouteList() {
         return routeList;
     }
     

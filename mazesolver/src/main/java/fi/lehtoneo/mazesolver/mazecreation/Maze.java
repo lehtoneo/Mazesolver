@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.lehtoneo.mazesolver.domain;
+package fi.lehtoneo.mazesolver.mazecreation;
 
 /**
  * Class to represent maze

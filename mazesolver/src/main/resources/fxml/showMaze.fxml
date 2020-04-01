@@ -6,13 +6,14 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.lehtoneo.mazesolver.ui.controllers.ShowMazeController">
+<AnchorPane id="AnchorPane" prefHeight="603.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.lehtoneo.mazesolver.ui.controllers.ShowMazeController">
    <children>
-      <Label fx:id="selectPoints" layoutX="40.0" layoutY="29.0" prefHeight="95.0" prefWidth="485.0" text="Please select start and end points from maze" />
-      <AnchorPane layoutY="108.0" AnchorPane.bottomAnchor="145.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="239.0" AnchorPane.topAnchor="108.0">
+      <Label fx:id="selectPoints" layoutX="333.0" layoutY="42.0" prefHeight="95.0" prefWidth="485.0" text="Please select start and end points from maze" />
+      <AnchorPane layoutX="209.0" layoutY="137.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="209.0" AnchorPane.rightAnchor="209.0" AnchorPane.topAnchor="137.0">
          <children>
-            <GridPane fx:id="mazegrid" layoutX="-30.0" layoutY="-14.0" prefHeight="350.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <GridPane fx:id="mazegrid" prefHeight="406.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -22,8 +23,11 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <Button fx:id="runWf" layoutX="420.0" layoutY="270.0" mnemonicParsing="false" onAction="#solveWf" text="Solve with wallfollower" visible="false" />
-      <Button fx:id="showWfRoute" layoutX="417.0" layoutY="338.0" mnemonicParsing="false" onAction="#showRoute" text="Show wallfollower route" visible="false" />
-      <Button layoutX="149.0" layoutY="491.0" mnemonicParsing="false" onAction="#createNew" text="Create new" />
+      <Button fx:id="showWfRoute" layoutX="91.0" layoutY="36.0" mnemonicParsing="false" onAction="#showWfRoute" text="Show wallfollower route" visible="false" />
+      <Button fx:id="createNew" layoutX="257.0" layoutY="564.0" mnemonicParsing="false" onAction="#createNew" text="Create new" />
+      <Button fx:id="solve" layoutX="19.0" layoutY="27.0" mnemonicParsing="false" onAction="#solve" text="Solve" visible="false" />
+      <Text layoutX="19.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Times :" visible="false" />
+      <Button fx:id="showBFSRoute" layoutX="301.0" layoutY="36.0" mnemonicParsing="false" onAction="#showBFSRoute" text="Show BFS route" visible="false" />
+      <Button fx:id="resetPath" layoutX="125.0" layoutY="89.0" mnemonicParsing="false" onAction="#resetPath" text="Reset path" visible="false" />
    </children>
 </AnchorPane>

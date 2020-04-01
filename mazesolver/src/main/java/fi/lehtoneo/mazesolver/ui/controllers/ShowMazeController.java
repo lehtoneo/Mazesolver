@@ -6,27 +6,25 @@ package fi.lehtoneo.mazesolver.ui.controllers;
  * and open the template in the editor.
  */
 
-import fi.lehtoneo.mazesolver.domain.Maze;
-import fi.lehtoneo.mazesolver.domain.Prim;
-import fi.lehtoneo.mazesolver.domain.Wallfollower;
+import fi.lehtoneo.mazesolver.datastructures.ArrayList;
+import fi.lehtoneo.mazesolver.mazecreation.Maze;
+import fi.lehtoneo.mazesolver.mazecreation.Prim;
+import fi.lehtoneo.mazesolver.mazesolving.BFS;
+import fi.lehtoneo.mazesolver.mazesolving.Wallfollower;
 import fi.lehtoneo.mazesolver.util.Cell;
 import java.net.URL;
-import javafx.util.Duration;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.ResourceBundle;
+
+import javafx.util.Duration;
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 
@@ -41,12 +39,19 @@ import javafx.scene.layout.RowConstraints;
  */
 public class ShowMazeController implements Initializable {
     private int i = 1;
+    private double speed = 1.0;
     
     @FXML
     AnchorPane gridparent;
     
     @FXML
-    Button runWf;
+    Button solve;
+    
+    @FXML
+    Button createNew;
+    
+    @FXML
+    Button resetPath;
     
     @FXML
     Label selectPoints;
@@ -55,11 +60,15 @@ public class ShowMazeController implements Initializable {
     Button showWfRoute;
     
     @FXML
+    Button showBFSRoute;
+    
+    @FXML
     GridPane mazegrid;
     
     Maze m;
     
-    List<Cell> wfRoute;
+    ArrayList<Cell> wfRoute;
+    ArrayList<Cell> bfsRoute;
     
     int[] start;
     int[] end;
@@ -68,7 +77,7 @@ public class ShowMazeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         start = null;
         end = null;
-        wfRoute = new ArrayList<>();
+        wfRoute = new ArrayList();
         
         mazegrid.getRowConstraints().remove(0);
         mazegrid.getColumnConstraints().remove(0);
@@ -93,6 +102,7 @@ public class ShowMazeController implements Initializable {
             col.setPercentWidth(100.00 / width);
             mazegrid.getColumnConstraints().add(col);
         }
+        
         
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
@@ -123,12 +133,12 @@ public class ShowMazeController implements Initializable {
                     newEnd[1] = j;
                     pane.setStyle("-fx-background-color:BLUE");
                     end = newEnd;
-                    runWf.setVisible(true);
                     selectPoints.setVisible(false);
+                    solve.setVisible(true);
                 }
             }
         });
-        if (String.valueOf(m.getGrid()[i][j]).equals("#")) {
+        if (m.getGrid()[i][j] == '#') {
             pane.setStyle("-fx-background-color:BLACK");
         } else {
             pane.setStyle("-fx-background-color:WHITE");
@@ -149,7 +159,7 @@ public class ShowMazeController implements Initializable {
         
         showWfRoute.setVisible(false);
         selectPoints.setVisible(true);
-        runWf.setVisible(false);
+        showBFSRoute.setVisible(false);
         
         while (mazegrid.getRowConstraints().size() > 0) {
             mazegrid.getRowConstraints().remove(0);
@@ -163,66 +173,123 @@ public class ShowMazeController implements Initializable {
         
     }
     
-    
     @FXML
-    private void solveWf(ActionEvent e) {
-        Wallfollower wf = new Wallfollower(m.getGrid(), start, end);
-        wf.solve();
-        wfRoute = wf.getRouteList();
+    private void solve(ActionEvent e) {
+        solveWf();
+        solveBFS();
+        
+        showBFSRoute.setVisible(true);
         showWfRoute.setVisible(true);
     }
     
     
+    private void solveWf() {
+        Wallfollower wf = new Wallfollower(m.getGrid(), start, end);
+        wf.solve();
+        wfRoute = wf.getRouteList();
+    }
+    
+    
     @FXML
-    private void showRoute(ActionEvent e) throws InterruptedException {
+    private void solveBFS() {
+        BFS bfs = new BFS(m.getGrid(), start, end);
+        bfs.solveRoute();
+        bfsRoute = bfs.getRouteList();
+        
+        
+    }
+    
+    
+    
+    public void showRoute(ArrayList<Cell> route) throws InterruptedException {
+        
         ObservableList<Node> children = mazegrid.getChildren();
+        int n = m.getGrid().length;
+        ArrayList<Pane> listOfPanes = new ArrayList();
         
-        ArrayList<Pane> listOfPanes = new ArrayList<>();
         
-        
-        for (int i = 0; i < wfRoute.size() - 1; i++) {
-            for (Node node : children) {
-                if (mazegrid.getRowIndex(node) == wfRoute.get(i).getRow() && mazegrid.getColumnIndex(node) == wfRoute.get(i).getColumn()) {
-                    Pane result = (Pane) node;
-                    listOfPanes.add(result);
-                    break;
-                }
-            }
+        for (int i = 0; i < route.size() - 1; i++) {
+            Cell c = route.get(i);
+            Pane p = (Pane) (children.get(c.getRow()*n+c.getColumn()));
+            listOfPanes.add(p);
         }
         
         
         helpRouteShow(listOfPanes);
-        
-        
-    
     }
     
+    @FXML
+    private void showWfRoute(ActionEvent e) throws InterruptedException {
+        
+        hideButtons();
+        showRoute(wfRoute);
+        
+        
+    }
+    
+    @FXML
+    private void showBFSRoute(ActionEvent e) throws InterruptedException {
+        
+        hideButtons();
+        showRoute(bfsRoute);
+    }
+    
+    @FXML
+    private void resetPath() {
+        ObservableList<Node> children = mazegrid.getChildren();
+        int n = m.getGrid().length;
+        
+        for (int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+            Pane p = (Pane) (children.get(i*n+j));
+            if(p.getStyle().equals("-fx-background-color:PINK") || p.getStyle().equals("-fx-background-color:GREY")) {
+                p.setStyle("-fx-background-color:WHITE");
+            }
+            }
+        }
+        
+        resetPath.setVisible(false);
+        showBFSRoute.setVisible(true);
+        showWfRoute.setVisible(true);
+        createNew.setVisible(true);
+    }
     
     private void helpRouteShow(ArrayList<Pane> panes) throws InterruptedException {
         i = 1;
 
-        PauseTransition pause = new PauseTransition(Duration.millis(100));
+        PauseTransition pause = new PauseTransition(Duration.millis(speed));
         pause.setOnFinished(event -> {
-        
+            
         
             if (i < panes.size()) {
                 
                 panes.get(i).setStyle("-fx-background-color:PINK");
-
+                
                 if (i + 1 < panes.size()) {
                     if (panes.get(i + 1).getStyle().equals("-fx-background-color:PINK")) {
                         panes.get(i).setStyle("-fx-background-color:GREY");
                     }
-                }
+                } 
                 
                 i++;
+                
                 pause.play();
                 
+            } else {
+                resetPath.setVisible(true);
             }
 
         });
-    
+        
         pause.play();
     }
+    
+    public void hideButtons() {
+        showBFSRoute.setVisible(false);
+        showWfRoute.setVisible(false);
+        createNew.setVisible(false);
+        solve.setVisible(false);
+    }
+    
     
 }

@@ -1,7 +1,6 @@
 package fi.lehtoneo.mazesolver.ui;
 
-import fi.lehtoneo.mazesolver.domain.*;
-import fi.lehtoneo.mazesolver.util.LinkedList;
+import fi.lehtoneo.mazesolver.datastructures.LinkedList;
 import java.io.IOException;
 
 import javafx.application.Application;

@@ -1,11 +1,10 @@
-package fi.lehtoneo.mazesolver.domain;
+package fi.lehtoneo.mazesolver.mazecreation;
 
 
+import fi.lehtoneo.mazesolver.datastructures.ArrayList;
 import fi.lehtoneo.mazesolver.util.Cell;
-import fi.lehtoneo.mazesolver.util.LinkedList;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+
 
 /**
  * 
@@ -16,6 +15,10 @@ public class Prim {
     char[][] grid;
     
     
+    /**
+    * @param rows number of rows in the generated maze
+    * @param columns number of columns in the generated maze
+    */
     public Prim(int rows, int columns) {
         this.grid = new char[rows][columns];
         init();
@@ -25,9 +28,10 @@ public class Prim {
      * Prim's algorithm to generate a "perfect" maze
      */
     public void generate() {
-        LinkedList<Cell> frontiers = new LinkedList<>();
+        ArrayList<Cell> frontiers = new ArrayList();
         
         Random random = new Random();
+                
         int rX = random.nextInt(grid.length - 2) + 1;
         int rY = random.nextInt(grid[0].length - 2) + 1;
         
@@ -47,14 +51,13 @@ public class Prim {
             frontiers.add(new Cell(rX, rY + 2));
         }
         
+        int test = 0;
         while (frontiers.size() > 0) {
-            
             
             int r = random.nextInt(frontiers.size());
             Cell c = frontiers.get(r);
-            
             frontiers.remove(r);
-            
+            test++;
             if (this.grid[c.getRow()][c.getColumn()] == '.') {
                 continue;
             }
@@ -62,7 +65,7 @@ public class Prim {
             int row = c.getRow();
             int col = c.getColumn();
             this.grid[row][col] = '.';
-            List<Cell> neighbours = new ArrayList<>();
+            ArrayList<Cell> neighbours = new ArrayList();
             
             if (row - 2 > 0) {
                 if (this.grid[row - 2][col] == '.') {
@@ -90,7 +93,7 @@ public class Prim {
             
             
             
-            if (neighbours.isEmpty()) {
+            if (neighbours.size() == 0) {
                 continue;
             }
             
@@ -132,6 +135,7 @@ public class Prim {
                 }
             }
         }
+        
     }
     
     

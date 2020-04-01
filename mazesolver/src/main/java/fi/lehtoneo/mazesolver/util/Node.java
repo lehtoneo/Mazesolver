@@ -2,8 +2,8 @@ package fi.lehtoneo.mazesolver.util;
 
 public class Node<T> {
     
-    T value;
-    Node next;
+    public T value;
+    public Node next;
     
     
     public Node(T t) {
