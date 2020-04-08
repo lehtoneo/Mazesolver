@@ -9,9 +9,7 @@ The project is built with Java.
 
 The algorithm that generates the maze is modified version of Prim's algorithm. (The description can be found [here](http://www.astrolog.org/labyrnth/algrithm.htm)).
 
-An algorithm to find the shortest path is called [shortest path algorithm](https://en.wikipedia.org/wiki/Maze_solving_algorithm#Shortest_path_algorithm). I will implement it by using [Breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search) (BFS).
-
-Prim's algorithm for maze creation should create a 'perfect' maze, which means that every part of the maze should be reachable. To test this, a [Depth-first search](https://en.wikipedia.org/wiki/Depth-first_search) needs to be implemented.
+An algorithm to find the shortest path is called [shortest path algorithm](https://en.wikipedia.org/wiki/Maze_solving_algorithm#Shortest_path_algorithm). I will implement it by using [Breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search) (BFS). Prim's algorithm for maze creation should create a 'perfect' maze, which means that every part of the maze should be reachable. BFS will also be used to test this.
 
 Another algorithm to find a path in maze between two points is [Wall follower](https://en.wikipedia.org/wiki/Maze_solving_algorithm#Wall_follower).
 
@@ -58,15 +56,6 @@ The goal for time complexity is O(E + V), where E is the total number of edges a
 
 The goal for space complexity is O(E), where E is the total number of edges.
 
-### Depth-first search
-
-#### Time
-
-The goal for time complexity is O(E + V), where E is the total number of edges and V is the total number of verticles.
-
-#### Space
-
-The goal for space complexity is O(V), where V is the total number of edges.
 
 ### Wall follower
 
