@@ -17,10 +17,10 @@ public class Wallfollower {
     char[][] maze;
     // 0 down, 1 right, 2 up, 3 left
     int direction;
-    int down;
-    int right;
-    int left;
-    int up;
+    private final int down = 3;
+    private final int right = 0;
+    private final int left = 2;
+    private final int up = 1;
     
     ArrayList<Cell> routeList;
     
@@ -30,7 +30,7 @@ public class Wallfollower {
     private int y;
     
      /**
-     * Constuctor for class Wallfollower
+     * 
      * @param grid maze which is solved by method solve()
      * @param start the point where algorithm starts. Here start[0] is x of starting point and start[1] is y of starting point.
      * @param end the point that the algorithm tries to find the path to. Here end[0] is x of ending point and end[1] is y of ending point.
@@ -38,10 +38,6 @@ public class Wallfollower {
     public Wallfollower(char[][] grid, int[] start, int[] end) {
         this.maze = grid;
         direction = 1;
-        right = 0;
-        up = 1;
-        left = 2;
-        down = 3;
         
         routeList = new ArrayList();
         
@@ -52,7 +48,7 @@ public class Wallfollower {
         gY = end[1];
     }
     
-      /**
+     /**
      * 
      * Solves the maze given in constructor with Wallfinder algorithm.
      * It adds every visited maze cell into routeList.

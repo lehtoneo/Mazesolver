@@ -31,7 +31,7 @@ public class Prim {
         ArrayList<Cell> frontiers = new ArrayList();
         
         Random random = new Random();
-                
+        //takes a random starting cell        
         int rX = random.nextInt(grid.length - 2) + 1;
         int rY = random.nextInt(grid[0].length - 2) + 1;
         
@@ -51,13 +51,13 @@ public class Prim {
             frontiers.add(new Cell(rX, rY + 2));
         }
         
-        int test = 0;
+        
         while (frontiers.size() > 0) {
             
             int r = random.nextInt(frontiers.size());
             Cell c = frontiers.get(r);
             frontiers.remove(r);
-            test++;
+            
             if (this.grid[c.getRow()][c.getColumn()] == '.') {
                 continue;
             }

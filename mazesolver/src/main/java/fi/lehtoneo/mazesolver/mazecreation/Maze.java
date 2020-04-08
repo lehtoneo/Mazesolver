@@ -22,17 +22,6 @@ public class Maze {
         this.columns = g[0].length;
     }
     
-    
-    
-    public Maze(int rows, int columns) {
-        
-        this.rows = rows;
-        this.columns = columns;
-        this.grid = new char[rows][columns];
-        
-        init();
-    }
-    
 
     /*
     *
@@ -54,12 +43,10 @@ public class Maze {
         
         return toReturn;
     }
-
+    
     public void setGrid(char[][] grid) {
         this.grid = grid;
     }
-    
-    
     
     
     public char[][] getGrid() {
@@ -68,21 +55,6 @@ public class Maze {
     
     
     
-    /*
-    * Creates outerwalls to maze and inserts everything else as path
-    */
-    private void init() {
-        
-        for (int i = 0; i  < this.rows; i++) {
-            for (int j = 0; j < this.columns; j++) {
-                if (i == 0 || i ==  this.rows - 1 || j == 0 || j == this.columns - 1) {
-                    this.grid[i][j] = '#';
-                } else {
-                    this.grid[i][j] = '.';
-                }
-            }
-        }
-        
-    }
+    
     
 }

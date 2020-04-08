@@ -10,27 +10,33 @@ import fi.lehtoneo.mazesolver.datastructures.LinkedList;
 import fi.lehtoneo.mazesolver.util.Cell;
 
 /**
- *
- * @author ossij
+ * Class to solve a maze with BFS
  */
 public class BFS {
-    int start[];
-    int end[];
+    
     char[][] maze;
     boolean[][] visited;
     
     int[][][] route;
     
     ArrayList<Cell> routeList;
+    ArrayList<Cell> goBackList;
     private final int gX;
     private final int gY;
     private final int x;
     private final int y;
     
+    /**
+     * 
+     * @param grid maze which is solved
+     * @param start the point where algorithm starts. Here start[0] is x of starting point and start[1] is y of starting point.
+     * @param end the point that the algorithm tries to find the path to. Here end[0] is x of ending point and end[1] is y of ending point.
+     */
     public BFS(char[][] grid, int[] start, int[] end) {
         maze = grid;
         visited = new boolean[grid.length][grid.length];
         routeList = new ArrayList();
+        goBackList = new ArrayList();
         route = new int[maze.length][maze.length][2];
         
         x = start[0];
@@ -40,7 +46,11 @@ public class BFS {
         gY = end[1];
     }
     
-    
+    /**
+    * Solves the maze given in constructor with BFS.
+    * After the algorithm is complete, routeList contains every visited cell in the order they were visited  
+    * and goBackRoute contains the shortest path in reverse order.
+    */
     public void solveRoute() {
         LinkedList<Cell> stack = new LinkedList();
         stack.add(new Cell(x, y));
@@ -54,7 +64,7 @@ public class BFS {
             
             if(!visited[row][col] && !visited[gX][gY]) {
                 visited[row][col] = true;
-                
+                routeList.add(c);
                 if(row - 1 > 0) {
                     if(maze[row - 1][col] == '.' && !visited[row - 1][col]) {
                         stack.add(new Cell(row - 1, col));
@@ -92,11 +102,14 @@ public class BFS {
         }
         
         
-        initRouteList();
+        initGoBackList();
         
     }
     
-    
+    /**
+    * Checks if every path cell '.' in maze is reachable
+    * @return true if every path cell '.' in maze is reachable.
+    */
     public boolean everythingIsReachableInMaze() {
         LinkedList<Cell> stack = new LinkedList();
         stack.add(new Cell(x, y));
@@ -154,29 +167,32 @@ public class BFS {
         return true;
     }
     
-    
-    public void initRouteList() {
+    /**
+     * Follows the found path from end to start and adds every cell to goBackList
+     */
+    public void initGoBackList() {
         int gX = this.gX;
         int gY = this.gY;
-        ArrayList<Cell> temp = new ArrayList();
+        
         while(gX != x || gY != y) {
             int helpX = gX;
-            temp.add(new Cell(gX, gY));
+            goBackList.add(new Cell(gX, gY));
             gX = route[gX][gY][0];
             gY = route[helpX][gY][1];
             
         }
-        temp.add(new Cell(x, y));
+        goBackList.add(new Cell(gX, gY));
         
-        int j = temp.size() - 1;
-        for(int i = 0; i < temp.size(); i++) {
-            routeList.add(temp.get(j));
-            j--;
-        }
     }
     
     public ArrayList<Cell> getRouteList() {
         return routeList;
     }
+    
+    public ArrayList<Cell> getGoBackList() {
+        return goBackList;
+    }
+    
+    
     
 }

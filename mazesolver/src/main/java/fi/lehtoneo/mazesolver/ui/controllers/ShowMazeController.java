@@ -1,16 +1,13 @@
 package fi.lehtoneo.mazesolver.ui.controllers;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 import fi.lehtoneo.mazesolver.datastructures.ArrayList;
 import fi.lehtoneo.mazesolver.mazecreation.Maze;
 import fi.lehtoneo.mazesolver.mazecreation.Prim;
 import fi.lehtoneo.mazesolver.mazesolving.BFS;
 import fi.lehtoneo.mazesolver.mazesolving.Wallfollower;
+import fi.lehtoneo.mazesolver.mazesolving.Tremauxs;
 import fi.lehtoneo.mazesolver.util.Cell;
 import java.net.URL;
 
@@ -40,6 +37,7 @@ import javafx.scene.layout.RowConstraints;
 public class ShowMazeController implements Initializable {
     private int i = 1;
     private double speed = 1.0;
+    private boolean showingBFS = false;
     
     @FXML
     AnchorPane gridparent;
@@ -63,12 +61,17 @@ public class ShowMazeController implements Initializable {
     Button showBFSRoute;
     
     @FXML
+    Button showTremRoute;
+    
+    @FXML
     GridPane mazegrid;
     
     Maze m;
     
     ArrayList<Cell> wfRoute;
     ArrayList<Cell> bfsRoute;
+    ArrayList<Cell> tremRoute;
+    ArrayList<Cell> bfsGoBack;
     
     int[] start;
     int[] end;
@@ -134,7 +137,14 @@ public class ShowMazeController implements Initializable {
                     pane.setStyle("-fx-background-color:BLUE");
                     end = newEnd;
                     selectPoints.setVisible(false);
+                    
                     solve.setVisible(true);
+                }
+            } else {
+                if(end != null) {
+                pane.setStyle("-fx-background-color:WHITE");
+                m.getGrid()[i][j] = '.';
+                showSolveAndHideRoutes();
                 }
             }
         });
@@ -157,9 +167,11 @@ public class ShowMazeController implements Initializable {
         start = null;
         end = null;
         
+        solve.setVisible(false);
         showWfRoute.setVisible(false);
         selectPoints.setVisible(true);
         showBFSRoute.setVisible(false);
+        showTremRoute.setVisible(false);
         
         while (mazegrid.getRowConstraints().size() > 0) {
             mazegrid.getRowConstraints().remove(0);
@@ -177,9 +189,10 @@ public class ShowMazeController implements Initializable {
     private void solve(ActionEvent e) {
         solveWf();
         solveBFS();
-        
+        solveTrem();
         showBFSRoute.setVisible(true);
         showWfRoute.setVisible(true);
+        showTremRoute.setVisible(true);
     }
     
     
@@ -190,12 +203,18 @@ public class ShowMazeController implements Initializable {
     }
     
     
-    @FXML
+    
     private void solveBFS() {
         BFS bfs = new BFS(m.getGrid(), start, end);
         bfs.solveRoute();
         bfsRoute = bfs.getRouteList();
-        
+        bfsGoBack = bfs.getGoBackList();
+    }
+    
+    private void solveTrem() {
+        Tremauxs t = new Tremauxs(m.getGrid(), start, end);
+        t.solve();
+        tremRoute = t.getRouteList();
         
     }
     
@@ -216,22 +235,33 @@ public class ShowMazeController implements Initializable {
         
         
         helpRouteShow(listOfPanes);
+        
+        
     }
+    
+   
     
     @FXML
     private void showWfRoute(ActionEvent e) throws InterruptedException {
-        
+        showingBFS = false;
         hideButtons();
         showRoute(wfRoute);
         
-        
     }
+    
     
     @FXML
     private void showBFSRoute(ActionEvent e) throws InterruptedException {
-        
+        showingBFS = true;
         hideButtons();
         showRoute(bfsRoute);
+    }
+    
+    @FXML
+    private void showTremRoute(ActionEvent e) throws InterruptedException {
+        showingBFS = false;
+        hideButtons();
+        showRoute(tremRoute);
     }
     
     @FXML
@@ -242,7 +272,8 @@ public class ShowMazeController implements Initializable {
         for (int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
             Pane p = (Pane) (children.get(i*n+j));
-            if(p.getStyle().equals("-fx-background-color:PINK") || p.getStyle().equals("-fx-background-color:GREY")) {
+            if(!p.getStyle().equals("-fx-background-color:RED") && !p.getStyle().equals("-fx-background-color:BLUE"))
+            if(m.getGrid()[i][j] == '.') {
                 p.setStyle("-fx-background-color:WHITE");
             }
             }
@@ -251,31 +282,77 @@ public class ShowMazeController implements Initializable {
         resetPath.setVisible(false);
         showBFSRoute.setVisible(true);
         showWfRoute.setVisible(true);
+        showTremRoute.setVisible(true);
         createNew.setVisible(true);
+        solve.setVisible(true);
     }
     
     private void helpRouteShow(ArrayList<Pane> panes) throws InterruptedException {
         i = 1;
 
-        PauseTransition pause = new PauseTransition(Duration.millis(speed));
+        PauseTransition pause = new PauseTransition(Duration.millis(10));
+        pause.setOnFinished(event -> {
+            
+        
+            if (i < panes.size()) {
+             boolean isStart = panes.get(i).getStyle().equals("-fx-background-color:RED");
+                panes.get(i).setStyle("-fx-background-color:PINK");
+                
+                if (i + 1 < panes.size()) {
+                    if (panes.get(i + 1).getStyle().equals("-fx-background-color:PINK") || panes.get(i + 1).getStyle().equals("-fx-background-color:RED")) {
+                        panes.get(i).setStyle("-fx-background-color:GREY");
+                    }
+                } 
+                
+                if(isStart) {
+                    panes.get(i).setStyle("-fx-background-color:RED");
+                }
+                
+                i++;
+                pause.play();
+                
+            } else {
+                if(showingBFS) {
+                    ArrayList<Pane> listOfPanes = new ArrayList();
+                    int n = m.getGrid().length;
+                    ObservableList<Node> children = mazegrid.getChildren();
+                        for (int i = 0; i < bfsGoBack.size() - 1; i++) {
+                            Cell c = bfsGoBack.get(i);
+                            Pane p = (Pane) (children.get(c.getRow()*n+c.getColumn()));
+                            listOfPanes.add(p);
+                        }
+
+                    try {
+                        helpBFSRouteShow(listOfPanes);
+                    } catch (InterruptedException ex) {
+                       
+                    }
+                } else {
+                    resetPath.setVisible(true);
+                }
+            }
+
+        });
+        
+        pause.play();
+    }
+    private void helpBFSRouteShow(ArrayList<Pane> panes) throws InterruptedException {
+        i = 1;
+
+        PauseTransition pause = new PauseTransition(Duration.millis(10));
         pause.setOnFinished(event -> {
             
         
             if (i < panes.size()) {
                 
-                panes.get(i).setStyle("-fx-background-color:PINK");
                 
-                if (i + 1 < panes.size()) {
-                    if (panes.get(i + 1).getStyle().equals("-fx-background-color:PINK")) {
-                        panes.get(i).setStyle("-fx-background-color:GREY");
-                    }
-                } 
-                
+                   
+                panes.get(i).setStyle("-fx-background-color:GREEN");
                 i++;
-                
                 pause.play();
                 
             } else {
+                
                 resetPath.setVisible(true);
             }
 
@@ -283,12 +360,19 @@ public class ShowMazeController implements Initializable {
         
         pause.play();
     }
-    
     public void hideButtons() {
         showBFSRoute.setVisible(false);
         showWfRoute.setVisible(false);
+        showTremRoute.setVisible(false);
         createNew.setVisible(false);
         solve.setVisible(false);
+    }
+    
+    public void showSolveAndHideRoutes() {
+        solve.setVisible(true);
+        showBFSRoute.setVisible(false);
+        showWfRoute.setVisible(false);
+        showTremRoute.setVisible(false);
     }
     
     

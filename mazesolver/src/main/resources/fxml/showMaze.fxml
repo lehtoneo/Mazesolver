@@ -29,5 +29,6 @@
       <Text layoutX="19.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Times :" visible="false" />
       <Button fx:id="showBFSRoute" layoutX="301.0" layoutY="36.0" mnemonicParsing="false" onAction="#showBFSRoute" text="Show BFS route" visible="false" />
       <Button fx:id="resetPath" layoutX="125.0" layoutY="89.0" mnemonicParsing="false" onAction="#resetPath" text="Reset path" visible="false" />
+      <Button fx:id="showTremRoute" layoutX="456.0" layoutY="36.0" mnemonicParsing="false" onAction="#showTremRoute" text="Show Tremaux's route" visible="false" />
    </children>
 </AnchorPane>

@@ -21,23 +21,17 @@ public class MazeTest {
     
     @Before 
     public void setUp() {
-        maze = new Maze(10,10);
+        char[][] c =   {{'#','#','#','#', '#',},
+                        {'#','.','#','#', '#',},
+                        {'#','.','#','#', '#',},
+                        {'#','.','#','.', '#',},
+                        {'#','.','.','.', '#',},
+                        {'#','#','#','.', '#',},
+                        {'#','#','#','#', '#',}};
+        
+        maze = new Maze(c);
     }
     
-    @Test
-    public void outerBordersAreWall() {
-        char[][] grid = maze.getGrid();
-        
-        for(int j = 0; j < grid[0].length; j++) {
-            assertEquals(grid[0][j], '#');
-            assertEquals(grid[grid.length-1][j], '#');
-        }
-        
-        for(int i = 1; i < grid.length; i++) {
-            assertEquals(grid[i][0], '#');
-            assertEquals(grid[i][grid[0].length-1], '#');
-        }
-    }
     
     @Test
     public void toStringWorks() {
