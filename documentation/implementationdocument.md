@@ -38,17 +38,75 @@ The maximum number of verticles in the frontier list is (n^2)/2. The time comple
 Initialize direction as right. 
 
 while you are not in the end point
+
     if you are going right
+    
         try to go down
-        if you can't go down (there is a wall below you)
-            try to go right
-            if you can't go right
-                try to go up
-                if you can't go up
-                    go left
-    This is done for every possible direction (left, right, up, down)
-    
-The worst case scenario is that the algorithm has to visit every verticle twice. Hence, if we have V verticles in a  maze, the timecomplexity is  O(2V) = O(V).
         
+        if you can't go down (there is a wall below you)
+        
+            try to go right
+            
+            if you can't go right
+            
+                try to go up
+                
+                if you can't go up
+                
+                    go left
+                    
+    This is done for every other possible directions (left, up, down)
     
+The worst case scenario is that the algorithm has to visit every verticle twice. Hence, if we have V verticles in a  maze, the time complexity is  O(2V) = O(V).
+
+## Tremaux's
+
+The algorithm works with and without loops in the maze.
+
+### Pseudo code
+        
+The algorithm can be in two states: going forward or not going forward (going backwards).
+
+while not in the end point
+
+    if going forward
+    
+        if you are in an intersection 
+            if you haven't been in the intersection
+                take a random path from the intersection and continue going forward
+                mark the cell you came from
+            else (you have been in the intersection)
+                going forward = false
+    
+    else (going backwards)
+        
+        if you are in an intersection
+            if there are unvisited paths you can take from the intersection
+                take a random unvisited path
+                going forward = true
+             else (there are not unvisited paths you can take from the intersection)
+                go back from the cell you first came to the intersection
+ 
+The worst case scenario is that the algorithm has to visit every verticle twice. Hence, if we have V verticles in a  maze, the time complexity is  O(2V) = O(V).
+ 
+## Shortest path algorithm (with BFS)
+ 
+The algorithm works with and without loops in the maze.
+
+### Pseudo code
+
+put starting verticle in the stack
+
+while stack is not empty or we are in the end point
+
+    get first verticle (v) from the stack
+    if not visited v
+        for each veticle v2 you can go from v 
+            add v as parent of v2
+            add v2 to stack
+
+traceback from end point to start every verticles parent.
+
+
+The time complexity of BFS is O(E+V) where V is the number of verticles and E is the number of edges. Since the bfs is what the algorithm does most of the time, O(E+V) is the time complexity of the algorithm.
 
