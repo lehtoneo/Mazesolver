@@ -28,3 +28,27 @@ Frontier of some cell C is a cell with distance 2 from C and it is within the ma
 
 The maximum number of verticles in the frontier list is (n^2)/2. The time complexity
  of removing a cell from the list is O(n). Hence the time complexity is O(n*(n^2)/2) = O(n^3).
+ 
+ ## Wall follower
+ 
+ The implemented wall follower uses "right-hand rule". The algorithm might not work if there are loops in the maze. 
+ 
+ ### Pseudo code
+ 
+Initialize direction as right. 
+
+while you are not in the end point
+    if you are going right
+        try to go down
+        if you can't go down (there is a wall below you)
+            try to go right
+            if you can't go right
+                try to go up
+                if you can't go up
+                    go left
+    This is done for every possible direction (left, right, up, down)
+    
+The worst case scenario is that the algorithm has to visit every verticle twice. Hence, if we have V verticles in a  maze, the timecomplexity is  O(2V) = O(V).
+        
+    
+
