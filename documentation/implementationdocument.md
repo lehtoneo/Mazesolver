@@ -35,9 +35,9 @@ of removing a cell from the list is O(n). Hence the time complexity is O(n*(n^2)
  
  ### Pseudo code
  
-Initialize direction as right. 
+    Initialize direction as right. 
 
-while you are not in the end point
+    while you are not in the end point
 
     if you are going right
     
