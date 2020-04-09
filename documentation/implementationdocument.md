@@ -11,23 +11,23 @@ all mazes given to the algorithm in the project are sized n x n.
 
 Frontier of some cell C is a cell with distance 2 from C and it is within the maze and not wall.
 
-1. Choose a random cell R withing the maze grid.
-2. Mark R as visited.
-3. Add all R's frontier cells to frontier list
-4. While frontier list is not empty:
+    Choose a random cell R withing the maze grid.
+    Mark R as visited.
+    Add all R's frontier cells to frontier list
+    While frontier list is not empty:
 
-    a) Choose a random frontier A from the list.
-    
-    b) Remove A from frontier list.
-    
-    c) Choose a random cell B which is in distance 2 from A and not visited.
-    
-    d) Connect A with B.
-    
-    e) Add all B's frontiers to frontier list.
+        Choose a random frontier A from the list.
+
+        Remove A from frontier list.
+
+        Choose a random cell B which is in distance 2 from A and not visited.
+
+        Connect A with B.
+
+        Add all B's frontiers to frontier list.
 
 The maximum number of verticles in the frontier list is (n^2)/2. The time complexity
- of removing a cell from the list is O(n). Hence the time complexity is O(n*(n^2)/2) = O(n^3).
+of removing a cell from the list is O(n). Hence the time complexity is O(n*(n^2)/2) = O(n^3).
  
  ## Wall follower
  
@@ -65,27 +65,26 @@ The algorithm works with and without loops in the maze.
 
 ### Pseudo code
         
-The algorithm can be in two states: going forward or not going forward (going backwards).
+    The algorithm can be in two states: going forward or not going forward (going backwards).
 
-while not in the end point
+    while not in the end point
+        if going forward
 
-    if going forward
-    
-        if you are in an intersection 
-            if you haven't been in the intersection
-                take a random path from the intersection and continue going forward
-                mark the cell you came from
-            else (you have been in the intersection)
-                going forward = false
-    
-    else (going backwards)
-        
-        if you are in an intersection
-            if there are unvisited paths you can take from the intersection
-                take a random unvisited path
-                going forward = true
-             else (there are not unvisited paths you can take from the intersection)
-                go back from the cell you first came to the intersection
+            if you are in an intersection 
+                if you haven't been in the intersection
+                    take a random path from the intersection and continue going forward
+                    mark the cell you came from
+                else (you have been in the intersection)
+                    going forward = false
+
+        else (going backwards)
+
+            if you are in an intersection
+                if there are unvisited paths you can take from the intersection
+                    take a random unvisited path
+                    going forward = true
+                 else (there are not unvisited paths you can take from the intersection)
+                    go back from the cell you first came to the intersection
  
 The worst case scenario is that the algorithm has to visit every verticle twice. Hence, if we have V verticles in a  maze, the time complexity is  O(2V) = O(V).
  
@@ -95,17 +94,17 @@ The algorithm works with and without loops in the maze.
 
 ### Pseudo code
 
-put starting verticle in the stack
+    put starting verticle in the stack
 
-while stack is not empty or we are in the end point
+    while stack is not empty or we are in the end point
 
-    get first verticle (v) from the stack
-    if not visited v
-        for each veticle v2 you can go from v 
-            add v as parent of v2
-            add v2 to stack
+        get first verticle (v) from the stack
+        if not visited v
+            for each veticle v2 you can go from v 
+                add v as parent of v2
+                add v2 to stack
 
-traceback from end point to start every verticles parent.
+    traceback from end point to start every verticles parent.
 
 
 The time complexity of BFS is O(E+V) where V is the number of verticles and E is the number of edges. Since the bfs is what the algorithm does most of the time, O(E+V) is the time complexity of the algorithm.
