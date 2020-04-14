@@ -26,8 +26,8 @@ Frontier of some cell C is a cell with distance 2 from C and it is within the ma
 
         Add all B's frontiers to frontier list.
 
-The maximum number of verticles in the frontier list is (n^2)/2. The time complexity
-of removing a cell from the list is O(n). Hence the time complexity is O(n*(n^2)/2) = O(n^3).
+The maximum number of verticles in the frontier list is (n^2). The time complexity
+of removing a cell from the list is O(n). Hence the time complexity is O(n*(n^2)) = O(n^3).
  
  ## Wall follower
  
@@ -101,11 +101,11 @@ The algorithm works with and without loops in the maze.
         get first verticle (v) from the stack
         if not visited v
             for each veticle v2 you can go from v 
-                add v as parent of v2
-                add v2 to stack
+                if not visited v2
+                    add v as parent of v2
+                    add v2 to stack
 
     traceback from end point to start every verticles parent.
 
 
-The time complexity of BFS is O(E+V) where V is the number of verticles and E is the number of edges. Since the bfs is what the algorithm does most of the time, O(E+V) is the time complexity of the algorithm.
-
+The time complexity of the algorithm is O(V) where V is the number of verticles. It may look like the time complexity is O(v^2) since there is a loop inside a loop, but every verticle has up to 4 verticles you can go to. Hence the upper limit of actions is V + 4V which leads to the time complexity of O(V).  
