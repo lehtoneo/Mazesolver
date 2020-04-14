@@ -27,7 +27,10 @@ Frontier of some cell C is a cell with distance 2 from C and it is within the ma
         Add all B's frontiers to frontier list.
 
 The maximum number of verticles in the frontier list is (n^2). The time complexity
-of removing a cell from the list is O(n). Hence the time complexity is O(n*(n^2)) = O(n^3).
+of removing a cell from the list is O(n). Hence the time complexity is O(n*(n^2)) = O(n^3). 
+
+The time complexity can be also expressed as O(E+V).
+
  
  ## Wall follower
  
