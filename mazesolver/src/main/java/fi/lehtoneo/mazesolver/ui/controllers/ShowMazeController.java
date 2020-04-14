@@ -6,7 +6,7 @@ import fi.lehtoneo.mazesolver.datastructures.ArrayList;
 import fi.lehtoneo.mazesolver.mazecreation.Maze;
 import fi.lehtoneo.mazesolver.mazecreation.Prim;
 import fi.lehtoneo.mazesolver.mazesolving.BFS;
-import fi.lehtoneo.mazesolver.mazesolving.Wallfollower;
+import fi.lehtoneo.mazesolver.mazesolving.WallFollower;
 import fi.lehtoneo.mazesolver.mazesolving.Tremauxs;
 import fi.lehtoneo.mazesolver.util.Cell;
 import java.net.URL;
@@ -38,7 +38,7 @@ public class ShowMazeController implements Initializable {
     private int i = 1;
     private double speed = 1.0;
     private boolean showingBFS = false;
-    
+    private boolean edited = false;
     @FXML
     AnchorPane gridparent;
     
@@ -123,27 +123,25 @@ public class ShowMazeController implements Initializable {
         pane.setOnMouseClicked(e -> {
             if (m.getGrid()[i][j] == '.') {
                 if (start == null) {
-                    int[] newStart = new int[2];
-                    newStart[0] = i;
-                    newStart[1] = j;
-                    start = newStart;
+                    start = new int[2];
+                    start[0] = i;
+                    start[1] = j;
                     pane.setStyle("-fx-background-color:RED");
                     return;
                 }
                 if (end == null) {
-                    int[] newEnd = new int[2];
-                    newEnd[0] = i;
-                    newEnd[1] = j;
                     pane.setStyle("-fx-background-color:BLUE");
-                    end = newEnd;
+                    end = new int[2];
+                    end[0] = i;
+                    end[1] = j;
                     selectPoints.setVisible(false);
-                    
                     solve.setVisible(true);
                 }
             } else {
                 if(end != null) {
                 pane.setStyle("-fx-background-color:WHITE");
                 m.getGrid()[i][j] = '.';
+                edited = true;
                 showSolveAndHideRoutes();
                 }
             }
@@ -166,7 +164,7 @@ public class ShowMazeController implements Initializable {
         
         start = null;
         end = null;
-        
+        edited = false;
         solve.setVisible(false);
         showWfRoute.setVisible(false);
         selectPoints.setVisible(true);
@@ -187,17 +185,26 @@ public class ShowMazeController implements Initializable {
     
     @FXML
     private void solve(ActionEvent e) {
-        solveWf();
+        long start1 = System.nanoTime();
         solveBFS();
+        long end1 = System.nanoTime();
+        System.out.println("BFS TIME in ms: " + (end1-start1)/1000000.0);
         solveTrem();
         showBFSRoute.setVisible(true);
+        if(!edited) {
         showWfRoute.setVisible(true);
+        solveWf();
+        }
+        long start2 = System.nanoTime();
         showTremRoute.setVisible(true);
+        long end2 = System.nanoTime();
+        System.out.println("TREM TIME in ms: " + (end2-start2)/1000000.0);
+        
     }
     
     
     private void solveWf() {
-        Wallfollower wf = new Wallfollower(m.getGrid(), start, end);
+        WallFollower wf = new WallFollower(m.getGrid(), start, end);
         wf.solve();
         wfRoute = wf.getRouteList();
     }
@@ -271,7 +278,7 @@ public class ShowMazeController implements Initializable {
         
         for (int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
-            Pane p = (Pane) (children.get(i*n+j));
+            Node p = (Pane) (children.get(i*n+j));
             if(!p.getStyle().equals("-fx-background-color:RED") && !p.getStyle().equals("-fx-background-color:BLUE"))
             if(m.getGrid()[i][j] == '.') {
                 p.setStyle("-fx-background-color:WHITE");
@@ -344,15 +351,11 @@ public class ShowMazeController implements Initializable {
             
         
             if (i < panes.size()) {
-                
-                
-                   
                 panes.get(i).setStyle("-fx-background-color:GREEN");
                 i++;
                 pause.play();
                 
             } else {
-                
                 resetPath.setVisible(true);
             }
 

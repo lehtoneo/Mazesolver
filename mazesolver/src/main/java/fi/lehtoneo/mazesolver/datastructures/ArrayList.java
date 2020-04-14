@@ -13,7 +13,7 @@ package fi.lehtoneo.mazesolver.datastructures;
 */
 public class ArrayList<T> {
     
-    private T[] arr = (T[])new Object[5];
+    private T[] arr = (T[])new Object[20];
     
     private int lastI;
     private int size;

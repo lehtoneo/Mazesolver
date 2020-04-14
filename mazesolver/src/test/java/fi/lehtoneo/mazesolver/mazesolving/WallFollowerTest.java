@@ -8,7 +8,7 @@ package fi.lehtoneo.mazesolver.mazesolving;
 import fi.lehtoneo.mazesolver.datastructures.ArrayList;
 import fi.lehtoneo.mazesolver.mazecreation.Maze;
 import fi.lehtoneo.mazesolver.mazecreation.Prim;
-import fi.lehtoneo.mazesolver.mazesolving.Wallfollower;
+import fi.lehtoneo.mazesolver.mazesolving.WallFollower;
 import fi.lehtoneo.mazesolver.util.Cell;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -20,7 +20,7 @@ import org.junit.Test;
  * @author ossij
  */
 
-public class WallfollowerTest {
+public class WallFollowerTest {
     Maze maze1;
     int[] start1 = new int[2];
     int[] end1 = new int[2];
@@ -49,7 +49,7 @@ public class WallfollowerTest {
         end1[0] = 5;
         end1[1] = 3;
         
-        Wallfollower wf1 = new Wallfollower(maze1.getGrid(), start1, end1);
+        WallFollower wf1 = new WallFollower(maze1.getGrid(), start1, end1);
         wf1.solve();
         routeList1 = wf1.getRouteList();
                 
@@ -80,7 +80,7 @@ public class WallfollowerTest {
         
         maze2 = new Maze(p.getGrid());
         
-        Wallfollower wf2 = new Wallfollower(maze2.getGrid(), start2, end2);
+        WallFollower wf2 = new WallFollower(maze2.getGrid(), start2, end2);
         wf2.solve();
         routeList2 = wf2.getRouteList();
     }

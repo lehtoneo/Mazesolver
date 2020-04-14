@@ -12,7 +12,7 @@ import fi.lehtoneo.mazesolver.util.Cell;
  * 
  * Class to solve a maze with Wallfollower algorithm
  */
-public class Wallfollower {
+public class WallFollower {
     
     char[][] maze;
     // 0 down, 1 right, 2 up, 3 left
@@ -35,7 +35,7 @@ public class Wallfollower {
      * @param start the point where algorithm starts. Here start[0] is x of starting point and start[1] is y of starting point.
      * @param end the point that the algorithm tries to find the path to. Here end[0] is x of ending point and end[1] is y of ending point.
      */
-    public Wallfollower(char[][] grid, int[] start, int[] end) {
+    public WallFollower(char[][] grid, int[] start, int[] end) {
         this.maze = grid;
         direction = 1;
         
@@ -56,13 +56,10 @@ public class Wallfollower {
      */
     public void solve() {
         
-        while (true) {
+        while (!(x == gX && y == gY)) {
             
             
             routeList.add(new Cell(x, y));
-            if (x == gX && y == gY) {
-                break;
-            }
             
             if (direction == right) {
                 if (maze[x + 1][y] == '.') {
@@ -125,6 +122,8 @@ public class Wallfollower {
                 }
             }
         }
+        
+        routeList.add(new Cell(gX, gY));
         
         
         

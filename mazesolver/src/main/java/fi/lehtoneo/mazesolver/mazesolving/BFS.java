@@ -58,45 +58,45 @@ public class BFS {
         
         while(!stack.isEmpty()) {
             
+            if(visited[gX][gY]) {
+                break;
+            }
+            
             Cell c = stack.pop();
             int row = c.getRow();
             int col = c.getColumn();
             
-            if(!visited[row][col] && !visited[gX][gY]) {
+            if(!visited[row][col]) {
                 visited[row][col] = true;
                 routeList.add(c);
-                if(row - 1 > 0) {
                     if(maze[row - 1][col] == '.' && !visited[row - 1][col]) {
                         stack.add(new Cell(row - 1, col));
                         route[row - 1][col][0] = row;
                         route[row - 1][col][1] = col;
                     }
-                }
                 
-                if(row + 1 < maze.length) {
+                
                     if(maze[row + 1][col] == '.' && !visited[row + 1][col]) {
                         stack.add(new Cell(row + 1, col));
                         route[row + 1][col][0] = row;
                         route[row + 1][col][1] = col;
                     }
-                }
                 
-                if(col - 1 > 0) {
+                
                     if(maze[row][col - 1] == '.' && !visited[row][col - 1]) {
                         stack.add(new Cell(row, col - 1));
                         route[row][col - 1][0] = row;
                         route[row][col - 1][1] = col;
                         
                     }
-                }
                 
-                if(col + 1 < maze.length) {
+                
                     if(maze[row][col + 1] == '.' && !visited[row][col + 1]) {
                         stack.add(new Cell(row, col + 1));
                         route[row][col + 1][0] = row;
                         route[row][col + 1][1] = col;
                     }
-                }
+                
                 
             }
         }
@@ -124,34 +124,25 @@ public class BFS {
             if(!visited[row][col]) {
                 visited[row][col] = true;
                 
-                if(row - 1 > 0) {
                     if(maze[row - 1][col] == '.' && !visited[row - 1][col]) {
                         stack.add(new Cell(row - 1, col));
                     }
-                }
                 
-                if(row + 1 < maze.length) {
+                
                     if(maze[row + 1][col] == '.' && !visited[row + 1][col]) {
                         stack.add(new Cell(row + 1, col));
                     }
-                }
                 
-                if(col - 1 > 0) {
+                
                     if(maze[row][col - 1] == '.' && !visited[row][col - 1]) {
                         stack.add(new Cell(row, col - 1));
                     }
-                }
                 
-                if(col + 1 < maze.length) {
+                
                     if(maze[row][col + 1] == '.' && !visited[row][col + 1]) {
                         stack.add(new Cell(row, col + 1));
                     }
-                }
-                
             }
-            
-            
-            
 
         
     }

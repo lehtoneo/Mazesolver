@@ -7,13 +7,14 @@ import org.junit.Test;
 
 
 public class PrimPerformanceTest {
-    private final int[] sizes = {100, 200};
+    private final int[] sizes = {100, 100, 100, 127, 200, 500, 625, 1000, 1222};
     private double[] results = new double[sizes.length];
     
     @Test
     public void runPerfTests() {
         long n = 300;
         long a = 0;
+        System.out.println("Prim performance tests starting, this might take a while... ");
         for(int i = 0; i < sizes.length; i++) {
             long sum = 0;
             
@@ -34,7 +35,7 @@ public class PrimPerformanceTest {
             
             a = 0;
             results[i] = Double.valueOf(sum)/(n-1);
-            System.out.println(i + " done");
+            System.out.println(i + 1 + "/" + sizes.length + " done");
             
         }
         

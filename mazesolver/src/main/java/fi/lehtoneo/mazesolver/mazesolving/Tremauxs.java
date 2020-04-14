@@ -24,6 +24,8 @@ public class Tremauxs {
     private int x;
     private int y;
     
+    private boolean[][] isIntersection;
+    
     private final int startX;
     private final int startY;
     private int[][][] parent;
@@ -38,7 +40,7 @@ public class Tremauxs {
         maze = grid;
         visited = new int[grid.length][grid.length];
         routeList = new ArrayList();
-        
+        isIntersection = new boolean[grid.length][grid.length];
         parent = new int[grid.length][grid.length][2];
         
         x = start[0];
@@ -124,6 +126,7 @@ public class Tremauxs {
                     x = prev.getRow();
                     y = prev.getColumn();
                     goingForward = false;
+                    
                 //just normal path, continue
                 } else {
                     Cell next = possible.get(0);
@@ -179,6 +182,9 @@ public class Tremauxs {
      */
     private boolean isIntersection(int x, int y) {
         int h = 0;
+        if(isIntersection[x][y]) {
+            return true;
+        }
         if(maze[x+1][y] == '.') {
             h++;
         }
@@ -190,6 +196,10 @@ public class Tremauxs {
         }
         if(maze[x][y-1] == '.') {
             h++;
+        }
+        
+        if(h > 2 || (x == startY && y == startX)) {
+            isIntersection[x][y] = true;
         }
         
         return h > 2 || (x == startY && y == startX);
