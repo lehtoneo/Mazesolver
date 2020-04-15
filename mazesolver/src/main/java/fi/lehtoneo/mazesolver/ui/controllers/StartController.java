@@ -30,7 +30,9 @@ public class StartController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
     }    
-    
+    /*
+    * Handles ok click
+    */
     @FXML
     public void onOkClick() throws Exception {
         

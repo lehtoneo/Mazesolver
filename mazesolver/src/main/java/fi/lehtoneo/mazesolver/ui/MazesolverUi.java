@@ -1,6 +1,5 @@
 package fi.lehtoneo.mazesolver.ui;
 
-import fi.lehtoneo.mazesolver.datastructures.LinkedList;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -14,7 +13,9 @@ import javafx.stage.Stage;
 public class MazesolverUi extends Application {
     
     
-    
+    /*
+    * Loads and shows the starting screen for user
+    */
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/start.fxml"));

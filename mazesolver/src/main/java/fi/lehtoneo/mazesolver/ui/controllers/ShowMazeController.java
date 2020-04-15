@@ -30,9 +30,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 
 /**
- * FXML Controller class
- *
- * @author ossij
+ * FXML Controller
+ * class for showing maze and the solutions
+ * @author lehtoneo
  */
 public class ShowMazeController implements Initializable {
     private int i = 1;
@@ -76,17 +76,23 @@ public class ShowMazeController implements Initializable {
     int[] start;
     int[] end;
     
+    /**
+    * Initializes the controller
+    */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         start = null;
         end = null;
-        wfRoute = new ArrayList();
         
         mazegrid.getRowConstraints().remove(0);
         mazegrid.getColumnConstraints().remove(0);
     }   
     
-    
+    /**
+    * Makes the gridpane look like a prim maze
+    * @param height - the height of the maze, also the number of rows to be put to the gridpane
+    * @param width - the width of the maze, also the number of columns to be put to the gridpane
+    */
     public void initGridToPrimMaze(int height, int width) {
         
         Prim prim = new Prim(height, width);
@@ -115,13 +121,36 @@ public class ShowMazeController implements Initializable {
         
         
     }
-    
+    /**
+    * Adds Pane objects to grid cells
+    * @param i - row number of the cell
+    * @param j - column number of the cell
+    */
     public void addPane(int i, int j) {
         
         
         AnchorPane pane = new AnchorPane();
+        //adds event listener to each cell, this makes it possible to select start and endpoints, and delete walls
         pane.setOnMouseClicked(e -> {
-            if (m.getGrid()[i][j] == '.') {
+            onPaneClick(i, j, pane);
+        });
+        
+        if (m.getGrid()[i][j] == '#') {
+            pane.setStyle("-fx-background-color:BLACK");
+        } else {
+            pane.setStyle("-fx-background-color:WHITE");
+        }
+        mazegrid.add(pane, j, i);
+    }
+    
+    /**
+    * Handles pane click
+    * @param i - row number of the pane
+    * @param j - columnd number of the pane
+    * @param pane - the pane of which state is to be changed
+    */
+    private void onPaneClick(int i, int j, Pane pane) {
+        if (m.getGrid()[i][j] == '.') {
                 if (start == null) {
                     start = new int[2];
                     start[0] = i;
@@ -145,14 +174,12 @@ public class ShowMazeController implements Initializable {
                 showSolveAndHideRoutes();
                 }
             }
-        });
-        if (m.getGrid()[i][j] == '#') {
-            pane.setStyle("-fx-background-color:BLACK");
-        } else {
-            pane.setStyle("-fx-background-color:WHITE");
-        }
-        mazegrid.add(pane, j, i);
     }
+    
+    
+    /*
+    * Creates a new maze
+    */
     
     @FXML
     private void createNew(ActionEvent e) {
@@ -183,33 +210,38 @@ public class ShowMazeController implements Initializable {
         
     }
     
+    /**
+    * Solves the maze from the start to finish
+    * If user has put wall to the maze, it does'not solve with wallfollower, since it may end up in infinite loop
+    */
     @FXML
     private void solve(ActionEvent e) {
-        long start1 = System.nanoTime();
+        
         solveBFS();
-        long end1 = System.nanoTime();
-        System.out.println("BFS TIME in ms: " + (end1-start1)/1000000.0);
+        
         solveTrem();
         showBFSRoute.setVisible(true);
         if(!edited) {
         showWfRoute.setVisible(true);
         solveWf();
         }
-        long start2 = System.nanoTime();
+        
         showTremRoute.setVisible(true);
-        long end2 = System.nanoTime();
-        System.out.println("TREM TIME in ms: " + (end2-start2)/1000000.0);
         
     }
     
-    
+    /**
+     * Solves the maze with wall follower
+     */
     private void solveWf() {
         WallFollower wf = new WallFollower(m.getGrid(), start, end);
         wf.solve();
         wfRoute = wf.getRouteList();
     }
     
-    
+    /*
+    * Solves the maze with BFS
+    */
     
     private void solveBFS() {
         BFS bfs = new BFS(m.getGrid(), start, end);
@@ -218,6 +250,9 @@ public class ShowMazeController implements Initializable {
         bfsGoBack = bfs.getGoBackList();
     }
     
+    /*
+    * Solves the maze with trem
+    */
     private void solveTrem() {
         Tremauxs t = new Tremauxs(m.getGrid(), start, end);
         t.solve();
@@ -225,26 +260,6 @@ public class ShowMazeController implements Initializable {
         
     }
     
-    
-    
-    public void showRoute(ArrayList<Cell> route) throws InterruptedException {
-        
-        ObservableList<Node> children = mazegrid.getChildren();
-        int n = m.getGrid().length;
-        ArrayList<Pane> listOfPanes = new ArrayList();
-        
-        
-        for (int i = 0; i < route.size() - 1; i++) {
-            Cell c = route.get(i);
-            Pane p = (Pane) (children.get(c.getRow()*n+c.getColumn()));
-            listOfPanes.add(p);
-        }
-        
-        
-        helpRouteShow(listOfPanes);
-        
-        
-    }
     
    
     
@@ -271,30 +286,31 @@ public class ShowMazeController implements Initializable {
         showRoute(tremRoute);
     }
     
-    @FXML
-    private void resetPath() {
+    
+    
+    /*
+    * Finds the panes from the grid that corresponds to each cell in the route
+    */
+    public void showRoute(ArrayList<Cell> route) throws InterruptedException {
+        
         ObservableList<Node> children = mazegrid.getChildren();
         int n = m.getGrid().length;
+        ArrayList<Pane> listOfPanes = new ArrayList();
         
-        for (int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-            Node p = (Pane) (children.get(i*n+j));
-            if(!p.getStyle().equals("-fx-background-color:RED") && !p.getStyle().equals("-fx-background-color:BLUE"))
-            if(m.getGrid()[i][j] == '.') {
-                p.setStyle("-fx-background-color:WHITE");
-            }
-            }
+        
+        for (int i = 0; i < route.size() - 1; i++) {
+            Cell c = route.get(i);
+            Pane p = (Pane) (children.get(c.getRow()*n+c.getColumn()));
+            listOfPanes.add(p);
         }
         
-        resetPath.setVisible(false);
-        showBFSRoute.setVisible(true);
-        showWfRoute.setVisible(true);
-        showTremRoute.setVisible(true);
-        createNew.setVisible(true);
-        solve.setVisible(true);
+        
+        animateRoute(listOfPanes);
+        
+        
     }
     
-    private void helpRouteShow(ArrayList<Pane> panes) throws InterruptedException {
+    private void animateRoute(ArrayList<Pane> panes) throws InterruptedException {
         i = 1;
 
         PauseTransition pause = new PauseTransition(Duration.millis(10));
@@ -320,17 +336,8 @@ public class ShowMazeController implements Initializable {
                 
             } else {
                 if(showingBFS) {
-                    ArrayList<Pane> listOfPanes = new ArrayList();
-                    int n = m.getGrid().length;
-                    ObservableList<Node> children = mazegrid.getChildren();
-                        for (int i = 0; i < bfsGoBack.size() - 1; i++) {
-                            Cell c = bfsGoBack.get(i);
-                            Pane p = (Pane) (children.get(c.getRow()*n+c.getColumn()));
-                            listOfPanes.add(p);
-                        }
-
                     try {
-                        helpBFSRouteShow(listOfPanes);
+                        animateTheRouteBFSFound();
                     } catch (InterruptedException ex) {
                        
                     }
@@ -343,8 +350,17 @@ public class ShowMazeController implements Initializable {
         
         pause.play();
     }
-    private void helpBFSRouteShow(ArrayList<Pane> panes) throws InterruptedException {
+    
+    private void animateTheRouteBFSFound() throws InterruptedException {
         i = 1;
+        ArrayList<Pane> panes = new ArrayList();
+        int n = m.getGrid().length;
+        ObservableList<Node> children = mazegrid.getChildren();
+        for (int i = 0; i < bfsGoBack.size() - 1; i++) {
+            Cell c = bfsGoBack.get(i);
+            Pane p = (Pane) (children.get(c.getRow()*n+c.getColumn()));
+            panes.add(p);
+        }
 
         PauseTransition pause = new PauseTransition(Duration.millis(10));
         pause.setOnFinished(event -> {
@@ -363,6 +379,35 @@ public class ShowMazeController implements Initializable {
         
         pause.play();
     }
+    
+    /*
+    * Resets the path after some route is shown
+    */
+    @FXML
+    private void resetPath() {
+        ObservableList<Node> children = mazegrid.getChildren();
+        int n = m.getGrid().length;
+        
+        for (int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+            Node p = (Pane) (children.get(i*n+j));
+            if(!p.getStyle().equals("-fx-background-color:RED") && !p.getStyle().equals("-fx-background-color:BLUE"))
+            if(m.getGrid()[i][j] == '.') {
+                p.setStyle("-fx-background-color:WHITE");
+            }
+            }
+        }
+        
+        resetPath.setVisible(false);
+        showBFSRoute.setVisible(true);
+        if(!edited) {
+        showWfRoute.setVisible(true);
+        }
+        showTremRoute.setVisible(true);
+        createNew.setVisible(true);
+        solve.setVisible(true);
+    }
+    
     public void hideButtons() {
         showBFSRoute.setVisible(false);
         showWfRoute.setVisible(false);

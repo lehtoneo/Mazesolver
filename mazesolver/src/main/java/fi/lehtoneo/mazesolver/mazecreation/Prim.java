@@ -164,8 +164,7 @@ public class Prim {
                 }
             }
         }
-        System.out.println(Double.valueOf(sum)/h);
-        System.out.println(h);
+        
     }
     
     
