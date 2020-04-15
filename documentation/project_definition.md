@@ -7,11 +7,17 @@ The project is built with Java.
 
 ## Algorithms
 
+### Maze creation
+
 The algorithm that generates the maze is modified version of Prim's algorithm. (The description can be found [here](http://www.astrolog.org/labyrnth/algrithm.htm)).
+
+### Maze solving
 
 An algorithm to find the shortest path is called [shortest path algorithm](https://en.wikipedia.org/wiki/Maze_solving_algorithm#Shortest_path_algorithm). I will implement it by using [Breadth-first search](https://en.wikipedia.org/wiki/Breadth-first_search) (BFS). Prim's algorithm for maze creation should create a 'perfect' maze, which means that every part of the maze should be reachable. BFS will also be used to test this.
 
 Another algorithm to find a path in maze between two points is [Wall follower](https://en.wikipedia.org/wiki/Maze_solving_algorithm#Wall_follower).
+
+Third algorithm to find paths between two points in maze is [Tremaux's algorithm](https://en.wikipedia.org/wiki/Maze_solving_algorithm#Tr%C3%A9maux's_algorithm).
 
 If there is time, more algorithms will be added.
 
@@ -27,9 +33,7 @@ There might be other datastructures that need to be implemented. They will be ad
 
 ## Input and output
 
-If the user chooses to create an own maze, first the user has to give the maze size as input. After that, he/she has to select start point 
-and end point from the maze. Aftert that, the user is shown the route which the algorithm found and the time it took for the algorithm 
-to find the route.
+User can select how big maze they want the prim's algorithm to create. After that they can select start and end points from the maze and see how different algorithm's solve the maze. The user can also remove walls from the maze.
 
 ## Time and space complexity goals
 
@@ -61,17 +65,25 @@ The goal for space complexity is O(E), where E is the total number of edges.
 
 #### Time
 
-The goal for time complexity is O(E + V), where E is the total number of edges and V is the total number of verticles.
+The goal for time complexity is O(E+V), where E is the total number of edges and V is the total number of verticles.
 
 #### Space
 
 The goal for space complexity is O(V), where V is the total number of edges.
 
+### Tremaux's
+
+#### Time
+
+The goal for time complexity is O(V), where V is the total number of verticles (path cells) in the maze.
+
+#### Space
+
+The goal for space complexity is O(V), where V is the total number of edges.
 
 #### Sources
 
-- https://en.wikipedia.org/wiki/A*_search_algorithm
+- https://en.wikipedia.org/wiki/Maze_solving_algorithm#Tr%C3%A9maux's_algorithm
 - https://en.wikipedia.org/wiki/Depth-first_search
 - https://en.wikipedia.org/wiki/Maze_solving_algorithm
-- https://www.geeksforgeeks.org/a-search-algorithm/
 - http://www.astrolog.org/labyrnth/algrithm.htm
