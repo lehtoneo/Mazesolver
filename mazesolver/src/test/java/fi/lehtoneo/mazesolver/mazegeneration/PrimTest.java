@@ -1,7 +1,6 @@
 
-package fi.lehtoneo.mazesolver.mazecreation;
+package fi.lehtoneo.mazesolver.mazegeneration;
 
-import fi.lehtoneo.mazesolver.mazecreation.Prim;
 import fi.lehtoneo.mazesolver.mazesolving.BFS;
 import static org.junit.Assert.*;
 import org.junit.Test;

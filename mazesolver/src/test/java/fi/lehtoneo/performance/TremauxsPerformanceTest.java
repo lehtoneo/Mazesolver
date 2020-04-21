@@ -1,10 +1,9 @@
 package fi.lehtoneo.performance;
 
-import fi.lehtoneo.mazesolver.mazecreation.Prim;
+import fi.lehtoneo.mazesolver.mazegeneration.Prim;
 import fi.lehtoneo.mazesolver.mazesolving.Tremauxs;
 import java.util.Random;
 import org.junit.After;
-import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class TremauxsPerformanceTest {

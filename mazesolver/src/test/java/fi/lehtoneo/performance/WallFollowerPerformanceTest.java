@@ -1,6 +1,6 @@
 package fi.lehtoneo.performance;
 
-import fi.lehtoneo.mazesolver.mazecreation.Prim;
+import fi.lehtoneo.mazesolver.mazegeneration.Prim;
 import fi.lehtoneo.mazesolver.mazesolving.WallFollower;
 import java.util.Random;
 import org.junit.After;

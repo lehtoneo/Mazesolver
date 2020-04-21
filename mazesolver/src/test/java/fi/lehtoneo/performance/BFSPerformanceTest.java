@@ -1,6 +1,6 @@
 package fi.lehtoneo.performance;
 
-import fi.lehtoneo.mazesolver.mazecreation.Prim;
+import fi.lehtoneo.mazesolver.mazegeneration.Prim;
 import fi.lehtoneo.mazesolver.mazesolving.BFS;
 import org.junit.After;
 import org.junit.Test;

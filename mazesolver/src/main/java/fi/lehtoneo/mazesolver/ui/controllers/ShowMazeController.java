@@ -3,8 +3,8 @@ package fi.lehtoneo.mazesolver.ui.controllers;
 
 
 import fi.lehtoneo.mazesolver.datastructures.ArrayList;
-import fi.lehtoneo.mazesolver.mazecreation.Maze;
-import fi.lehtoneo.mazesolver.mazecreation.Prim;
+import fi.lehtoneo.mazesolver.mazegeneration.Maze;
+import fi.lehtoneo.mazesolver.mazegeneration.Prim;
 import fi.lehtoneo.mazesolver.mazesolving.BFS;
 import fi.lehtoneo.mazesolver.mazesolving.WallFollower;
 import fi.lehtoneo.mazesolver.mazesolving.Tremauxs;

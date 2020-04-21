@@ -1,4 +1,4 @@
-package fi.lehtoneo.mazesolver.mazecreation;
+package fi.lehtoneo.mazesolver.mazegeneration;
 
 
 import fi.lehtoneo.mazesolver.datastructures.ArrayList;
@@ -8,7 +8,7 @@ import java.util.Random;
 
 /**
  * 
- * Class to create maze with Prim's algorithm (modified version)
+ * Class to generate a maze with Prim's algorithm (modified version)
  */
 public class Prim {
     
@@ -24,6 +24,12 @@ public class Prim {
         this.grid = new char[rows][columns];
         isInFrontierList = new boolean[grid.length][grid.length];
         init();
+    }
+    
+    public Prim(int rows, int columns, char[][] gridFullOfWall) {
+        this.grid = new char[rows][columns];
+        isInFrontierList = new boolean[grid.length][grid.length];
+        this.grid = gridFullOfWall;
     }
     
     /**

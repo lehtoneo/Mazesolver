@@ -6,8 +6,8 @@
 package fi.lehtoneo.mazesolver.mazesolving;
 
 import fi.lehtoneo.mazesolver.datastructures.ArrayList;
-import fi.lehtoneo.mazesolver.mazecreation.Maze;
-import fi.lehtoneo.mazesolver.mazecreation.Prim;
+import fi.lehtoneo.mazesolver.mazegeneration.Maze;
+import fi.lehtoneo.mazesolver.mazegeneration.Prim;
 import fi.lehtoneo.mazesolver.mazesolving.WallFollower;
 import fi.lehtoneo.mazesolver.util.Cell;
 import static org.junit.Assert.assertEquals;
