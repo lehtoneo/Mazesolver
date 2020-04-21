@@ -39,6 +39,7 @@ public class ShowMazeController implements Initializable {
     private double speed = 1.0;
     private boolean showingBFS = false;
     private boolean edited = false;
+    
     @FXML
     AnchorPane gridparent;
     
@@ -130,11 +131,13 @@ public class ShowMazeController implements Initializable {
         
         
         AnchorPane pane = new AnchorPane();
+        
+        if(i != 0 && i != m.getGrid().length - 1 && j != 0 && j != m.getGrid().length - 1) {
         //adds event listener to each cell, this makes it possible to select start and endpoints, and delete walls
         pane.setOnMouseClicked(e -> {
             onPaneClick(i, j, pane);
         });
-        
+        }
         if (m.getGrid()[i][j] == '#') {
             pane.setStyle("-fx-background-color:BLACK");
         } else {
