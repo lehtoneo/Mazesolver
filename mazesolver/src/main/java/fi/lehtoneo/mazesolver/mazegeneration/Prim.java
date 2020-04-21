@@ -3,7 +3,8 @@ package fi.lehtoneo.mazesolver.mazegeneration;
 
 import fi.lehtoneo.mazesolver.datastructures.ArrayList;
 import fi.lehtoneo.mazesolver.util.Cell;
-import java.util.Random;
+import fi.lehtoneo.mazesolver.util.Random;
+
 
 
 /**
@@ -52,13 +53,11 @@ public class Prim {
         ArrayList<Cell> frontiers = new ArrayList();
         
         Random random = new Random();
-        if(seed != -1) {
-            random = new Random(seed);
-        }
+        
         
         //takes a random starting cell        
-        int rX = random.nextInt(grid.length - 2) + 1;
-        int rY = random.nextInt(grid[0].length - 2) + 1;
+        int rX = random.randomInt(grid.length - 2) + 1;
+        int rY = random.randomInt(grid[0].length - 2) + 1;
         
         grid[rX][rY] = '.';
         if (rX - 2 >= 1) {
@@ -85,7 +84,7 @@ public class Prim {
         while (frontiers.size() > 0) {
             h++;
             sum += frontiers.size();
-            int r = random.nextInt(frontiers.size());
+            int r = random.randomInt(frontiers.size());
             Cell c = frontiers.get(r);
             frontiers.remove(r);
             
@@ -128,7 +127,7 @@ public class Prim {
                 continue;
             }
             
-            Cell neighbour = neighbours.get(new Random().nextInt(neighbours.size()));
+            Cell neighbour = neighbours.get(new Random().randomInt(neighbours.size()));
             
             if (neighbour.getRow() < row) {
                 this.grid[row - 1][col] = '.';

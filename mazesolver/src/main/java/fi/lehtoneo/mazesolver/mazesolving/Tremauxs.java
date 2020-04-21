@@ -7,7 +7,7 @@ package fi.lehtoneo.mazesolver.mazesolving;
 
 import fi.lehtoneo.mazesolver.datastructures.ArrayList;
 import fi.lehtoneo.mazesolver.util.Cell;
-import java.util.Random;
+import fi.lehtoneo.mazesolver.util.Random;
 /**
  * 
  * Class to solve a maze with Tremaux's algorithm
@@ -103,7 +103,7 @@ public class Tremauxs {
                         
                         exit[x][y][0] = prev.getRow();
                         exit[x][y][1] = prev.getColumn();
-                        Cell next = possible.get(r.nextInt(possible.size()));
+                        Cell next = possible.get(r.randomInt(possible.size()));
                         
                         parent[next.getRow()][next.getColumn()][0] = x;
                         parent[next.getRow()][next.getColumn()][1] = y;
@@ -156,7 +156,7 @@ public class Tremauxs {
                     y = exit[helpX][helpY][1];
                 } else {
                     
-                    Cell next = possible.get(r.nextInt(possible.size()));
+                    Cell next = possible.get(r.randomInt(possible.size()));
                     
                     parent[next.getRow()][next.getColumn()][0] = x;
                     parent[next.getRow()][next.getColumn()][1] = y;
