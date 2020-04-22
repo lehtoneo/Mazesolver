@@ -34,6 +34,29 @@ Re-run:
 mvn -Dtest=PrimPerformanceTest test
 ```
 
+### Recursive backtracker 
+
+
+Results: 
+
+| Maze size (n x n)  | (E + V)          | Time (ms)
+| -------------    |:-------------:| ------------|
+| 100x100          | 29800         | 0.003           |
+| 127x127          | 48122         | 0.13           |
+| 200x200          | 119600        | 1.32         |
+| 500x500          | 749000        | 9.8      |
+| 625x625          | 1561250       | 14.2      |
+| 1000x1000        | 2998000       | 37.99    |
+| 1222x1222        | 5970692       | 57.87    |
+
+The growth is exponential over n and linear over E + V, as expected.
+
+Re-run: 
+
+```
+mvn -Dtest=BacktrackerPerformanceTest test
+```
+
 ### Maze solving
 For each maze solved by the algorithms below, performance tests were made so that 300 of each size maze were created by prim's algorithm. The time column shows the average time it took to solve the maze. The starting point for the algorithms were always the top-left path cell in the maze, and the ending point was the most right path cell in the last row. 
 
