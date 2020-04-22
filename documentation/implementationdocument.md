@@ -31,6 +31,13 @@ of removing a cell from the list is O(n). Hence the time complexity is O(n*(n^2)
 
 The time complexity can be also expressed as O(E+V).
 
+ ## Recursive backtracker 
+ 
+ ### Pseudo code
+ 
+ https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker (the second one)
+ 
+ 
  
  ## Wall follower
  
