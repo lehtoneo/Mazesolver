@@ -63,13 +63,15 @@ public class Tremauxs {
         visited[x][y] = 1;
         int helpX = x;
         int helpY = y;
-        
+        exit[x][y][0] = -1;
+        //the directions where 
         if(maze[x+1][y] == '.') {
             x++;
             parent[x][y][0] = helpX;
             parent[x][y][1] = helpY;
             
         } else if (maze[x-1][y] == '.') {
+            
             x--;
             parent[x][y][0] = helpX;
             parent[x][y][1] = helpY;

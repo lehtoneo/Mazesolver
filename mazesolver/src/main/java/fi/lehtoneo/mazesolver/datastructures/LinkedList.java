@@ -31,6 +31,22 @@ public class LinkedList<T> {
     }
     
     
+    public void push(T t) {
+        size++;
+        
+        Node<T> n = new Node(t);
+        
+        if (first == null) {
+            first = n;
+            last = n;
+            return;
+        }
+        n.next = first;
+        first = n;
+        
+    }
+    
+    
     public void remove(int i) {
         int j = 0;
         

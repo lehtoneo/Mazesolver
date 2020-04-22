@@ -52,7 +52,7 @@ public class StartController implements Initializable {
         
         ShowMazeController controller = loader.<ShowMazeController>getController();
         
-        controller.initGridToPrimMaze(Integer.valueOf(n.getText()), Integer.valueOf(n.getText()));
+        controller.createPrimMaze(Integer.valueOf(n.getText()), Integer.valueOf(n.getText()));
         
         Stage stage = (Stage) n.getScene().getWindow();
         

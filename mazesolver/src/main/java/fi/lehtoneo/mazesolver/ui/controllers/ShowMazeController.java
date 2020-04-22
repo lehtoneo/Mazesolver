@@ -8,6 +8,7 @@ import fi.lehtoneo.mazesolver.mazegeneration.Prim;
 import fi.lehtoneo.mazesolver.mazesolving.BFS;
 import fi.lehtoneo.mazesolver.mazesolving.WallFollower;
 import fi.lehtoneo.mazesolver.mazesolving.Tremauxs;
+import fi.lehtoneo.mazesolver.mazegeneration.Backtracker;
 import fi.lehtoneo.mazesolver.util.Cell;
 import java.net.URL;
 
@@ -24,7 +25,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
-
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
@@ -36,10 +36,10 @@ import javafx.scene.layout.RowConstraints;
  */
 public class ShowMazeController implements Initializable {
     private int i = 1;
-    private double speed = 1.0;
     private boolean showingBFS = false;
     private boolean edited = false;
-    
+    private boolean showing = false;
+    private double speed = 0.1;
     @FXML
     AnchorPane gridparent;
     
@@ -48,6 +48,9 @@ public class ShowMazeController implements Initializable {
     
     @FXML
     Button createNew;
+    
+    @FXML
+    Button createNewBt;
     
     @FXML
     Button resetPath;
@@ -67,6 +70,16 @@ public class ShowMazeController implements Initializable {
     @FXML
     GridPane mazegrid;
     
+    @FXML
+    AnchorPane timeTable;
+    
+    @FXML
+    Label wfTime;
+    @FXML
+    Label bfsTime;
+    @FXML
+    Label tremTime;
+    
     Maze m;
     
     ArrayList<Cell> wfRoute;
@@ -82,11 +95,7 @@ public class ShowMazeController implements Initializable {
     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        start = null;
-        end = null;
         
-        mazegrid.getRowConstraints().remove(0);
-        mazegrid.getColumnConstraints().remove(0);
     }   
     
     /**
@@ -94,12 +103,41 @@ public class ShowMazeController implements Initializable {
     * @param height - the height of the maze, also the number of rows to be put to the gridpane
     * @param width - the width of the maze, also the number of columns to be put to the gridpane
     */
-    public void initGridToPrimMaze(int height, int width) {
-        
+    public void createPrimMaze(int height, int width) {
+        init();
         Prim prim = new Prim(height, width);
         prim.generate();
         
         m = new Maze(prim.getGrid());
+        
+        for (int i = 0; i < height; i++) {
+            RowConstraints row = new RowConstraints();
+            row.setPercentHeight(100.00 / height);
+            mazegrid.getRowConstraints().add(row);
+        }
+        
+        for (int j = 0; j < width; j++) {
+            ColumnConstraints col = new ColumnConstraints();
+            col.setPercentWidth(100.00 / width);
+            mazegrid.getColumnConstraints().add(col);
+        }
+        
+        
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                addPane(i, j);
+            }
+        }
+        
+        
+    }
+    
+    public void createBacktrackerMaze(int height, int width) {
+        init();
+        Backtracker bt = new Backtracker(height, width);
+        bt.generate();
+        
+        m = new Maze(bt.getGrid());
         
         for (int i = 0; i < height; i++) {
             RowConstraints row = new RowConstraints();
@@ -153,6 +191,9 @@ public class ShowMazeController implements Initializable {
     * @param pane - the pane of which state is to be changed
     */
     private void onPaneClick(int i, int j, Pane pane) {
+        if(showing) {
+            return;
+        }
         if (m.getGrid()[i][j] == '.') {
                 if (start == null) {
                     start = new int[2];
@@ -180,15 +221,24 @@ public class ShowMazeController implements Initializable {
     }
     
     
+    
     /*
     * Creates a new maze
     */
+    @FXML
+    private void createNewPrim(ActionEvent e) {
+        
+        createPrimMaze(m.getGrid().length, m.getGrid().length);
+        
+    }
     
     @FXML
-    private void createNew(ActionEvent e) {
+    private void createNewBt(ActionEvent e) {
+        createBacktrackerMaze(m.getGrid().length, m.getGrid().length);
+    }
+    
+    public void init() {
         
-        int height = mazegrid.getColumnConstraints().size();
-        int width = mazegrid.getRowConstraints().size();
         mazegrid.getChildren().removeAll(mazegrid.getChildren());
         
         
@@ -208,9 +258,6 @@ public class ShowMazeController implements Initializable {
         while (mazegrid.getColumnConstraints().size() > 0) {
             mazegrid.getColumnConstraints().remove(0);
         }
-        
-        initGridToPrimMaze(height, width);
-        
     }
     
     /**
@@ -219,18 +266,26 @@ public class ShowMazeController implements Initializable {
     */
     @FXML
     private void solve(ActionEvent e) {
-        
-        solveBFS();
-        
-        solveTrem();
-        showBFSRoute.setVisible(true);
         if(!edited) {
         showWfRoute.setVisible(true);
+        long start3 = System.nanoTime();
         solveWf();
+        long end3 = System.nanoTime();
+        wfTime.setText((end3-start3) + "");
         }
+        long start = System.nanoTime();
+        solveBFS();
+        long end = System.nanoTime();
+        long start2 = System.nanoTime();
+        solveTrem();
+        long end2 = System.nanoTime();
+        showBFSRoute.setVisible(true);
+        
         
         showTremRoute.setVisible(true);
         
+        tremTime.setText((end2-start2) + "");
+        bfsTime.setText((end-start) + "");
     }
     
     /**
@@ -268,15 +323,17 @@ public class ShowMazeController implements Initializable {
     
     @FXML
     private void showWfRoute(ActionEvent e) throws InterruptedException {
-        showingBFS = false;
+        
         hideButtons();
         showRoute(wfRoute);
+        
         
     }
     
     
     @FXML
     private void showBFSRoute(ActionEvent e) throws InterruptedException {
+        
         showingBFS = true;
         hideButtons();
         showRoute(bfsRoute);
@@ -284,9 +341,10 @@ public class ShowMazeController implements Initializable {
     
     @FXML
     private void showTremRoute(ActionEvent e) throws InterruptedException {
-        showingBFS = false;
+        
         hideButtons();
         showRoute(tremRoute);
+        
     }
     
     
@@ -295,7 +353,7 @@ public class ShowMazeController implements Initializable {
     * Finds the panes from the grid that corresponds to each cell in the route
     */
     public void showRoute(ArrayList<Cell> route) throws InterruptedException {
-        
+        showing = true;
         ObservableList<Node> children = mazegrid.getChildren();
         int n = m.getGrid().length;
         ArrayList<Pane> listOfPanes = new ArrayList();
@@ -316,7 +374,8 @@ public class ShowMazeController implements Initializable {
     private void animateRoute(ArrayList<Pane> panes) throws InterruptedException {
         i = 1;
 
-        PauseTransition pause = new PauseTransition(Duration.millis(10));
+        PauseTransition pause = new PauseTransition(Duration.millis(speed));
+        
         pause.setOnFinished(event -> {
             
         
@@ -345,6 +404,7 @@ public class ShowMazeController implements Initializable {
                        
                     }
                 } else {
+                    
                     resetPath.setVisible(true);
                 }
             }
@@ -365,7 +425,8 @@ public class ShowMazeController implements Initializable {
             panes.add(p);
         }
 
-        PauseTransition pause = new PauseTransition(Duration.millis(10));
+        PauseTransition pause = new PauseTransition(Duration.millis(speed));
+        
         pause.setOnFinished(event -> {
             
         
@@ -376,6 +437,7 @@ public class ShowMazeController implements Initializable {
                 
             } else {
                 resetPath.setVisible(true);
+                
             }
 
         });
@@ -400,7 +462,8 @@ public class ShowMazeController implements Initializable {
             }
             }
         }
-        
+        showing = false;
+        showingBFS = false;
         resetPath.setVisible(false);
         showBFSRoute.setVisible(true);
         if(!edited) {
@@ -408,14 +471,17 @@ public class ShowMazeController implements Initializable {
         }
         showTremRoute.setVisible(true);
         createNew.setVisible(true);
+        createNewBt.setVisible(true);
         solve.setVisible(true);
     }
     
+   
     public void hideButtons() {
         showBFSRoute.setVisible(false);
         showWfRoute.setVisible(false);
         showTremRoute.setVisible(false);
         createNew.setVisible(false);
+        createNewBt.setVisible(false);
         solve.setVisible(false);
     }
     

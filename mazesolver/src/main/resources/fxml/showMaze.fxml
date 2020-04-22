@@ -2,8 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -26,18 +24,23 @@
          </children>
       </AnchorPane>
       <Button fx:id="showWfRoute" layoutX="91.0" layoutY="36.0" mnemonicParsing="false" onAction="#showWfRoute" text="Show wallfollower route" visible="false" />
-      <Button fx:id="createNew" layoutX="197.0" layoutY="564.0" mnemonicParsing="false" onAction="#createNew" text="Create new" />
+      <Button fx:id="createNew" layoutX="122.0" layoutY="442.0" mnemonicParsing="false" onAction="#createNewPrim" text="Create new (prim)" />
       <Button fx:id="solve" layoutX="19.0" layoutY="27.0" mnemonicParsing="false" onAction="#solve" text="Solve" visible="false" />
       <Text layoutX="19.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Times :" visible="false" />
       <Button fx:id="showBFSRoute" layoutX="301.0" layoutY="36.0" mnemonicParsing="false" onAction="#showBFSRoute" text="Show BFS route" visible="false" />
       <Button fx:id="resetPath" layoutX="125.0" layoutY="89.0" mnemonicParsing="false" onAction="#resetPath" text="Reset path" visible="false" />
       <Button fx:id="showTremRoute" layoutX="456.0" layoutY="36.0" mnemonicParsing="false" onAction="#showTremRoute" text="Show Tremaux's route" visible="false" />
-      <TableView layoutX="62.0" layoutY="212.0" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-          <TableColumn prefWidth="41.0" text="Algo" />
-          <TableColumn prefWidth="99.0" text="Time" />
-            <TableColumn minWidth="5.0" prefWidth="57.0" text="Visited" />
-        </columns>
-      </TableView>
+      <Button fx:id="createNewBt" layoutX="122.0" layoutY="481.0" mnemonicParsing="false" onAction="#createNewBt" text="Create new (Bt)" />
+      <AnchorPane fx:id="timeTable" layoutX="82.0" layoutY="202.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label layoutX="62.0" layoutY="21.0" text="Time (ns)" />
+            <Label layoutX="3.0" layoutY="60.0" prefHeight="17.0" prefWidth="22.0" text="WF:" />
+            <Label layoutX="3.0" layoutY="92.0" text="BFS:" />
+            <Label layoutX="3.0" layoutY="126.0" prefHeight="17.0" prefWidth="45.0" text="Trem: " />
+            <Label fx:id="wfTime" layoutX="62.0" layoutY="60.0" prefHeight="17.0" prefWidth="119.0" />
+            <Label fx:id="tremTime" layoutX="62.0" layoutY="126.0" prefHeight="17.0" prefWidth="119.0" />
+            <Label fx:id="bfsTime" layoutX="62.0" layoutY="92.0" prefHeight="17.0" prefWidth="119.0" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

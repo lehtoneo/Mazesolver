@@ -27,12 +27,6 @@ public class Prim {
         init();
     }
     
-    public Prim(int rows, int columns, char[][] gridFullOfWall) {
-        this.grid = new char[rows][columns];
-        isInFrontierList = new boolean[grid.length][grid.length];
-        this.grid = gridFullOfWall;
-    }
-    
     /**
      * This constructor is only used for the performance tests
      * @param rows number of rows in the generated maze
