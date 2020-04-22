@@ -9,7 +9,10 @@ The project is built with Java.
 
 ### Maze creation
 
-The algorithm that generates the maze is modified version of Prim's algorithm. (The description can be found [here](http://www.astrolog.org/labyrnth/algrithm.htm)).
+The first algorithm to generate a maze is modified version of Prim's algorithm. (The description can be found [here](http://www.astrolog.org/labyrnth/algrithm.htm)).
+
+The second algorithm is Recursive backtracker. I chose this algorithm, because it generates mazes which look a lot different compared to 
+the Prim's algorithm. 
 
 ### Maze solving
 
@@ -87,3 +90,4 @@ The goal for space complexity is O(V), where V is the total number of edges.
 - https://en.wikipedia.org/wiki/Depth-first_search
 - https://en.wikipedia.org/wiki/Maze_solving_algorithm
 - http://www.astrolog.org/labyrnth/algrithm.htm
+- https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker
