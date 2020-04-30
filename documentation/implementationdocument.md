@@ -148,3 +148,11 @@ The algorithm works with and without loops in the maze.
 The time complexity of the algorithm is O(V) where V is the number of verticles. It may look like the time complexity is O(v^2) since there is a loop inside a loop, but every verticle has up to 4 verticles you can go to. Hence the upper limit of actions is V + 4V which leads to the time complexity of O(V).  
 
 The space complexity is O(n^2) where n is the width and height of the maze to be solve. The reason for this is that the algorithm saves visited array size of nxn.
+
+#### Sources
+- https://en.wikipedia.org/wiki/Maze_solving_algorithm#Tr%C3%A9maux's_algorithm
+- https://blog.jamisbuck.org/2014/05/12/tremauxs-algorithm.html
+- https://en.wikipedia.org/wiki/Depth-first_search
+- https://en.wikipedia.org/wiki/Maze_solving_algorithm
+- http://www.astrolog.org/labyrnth/algrithm.htm
+- https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker
