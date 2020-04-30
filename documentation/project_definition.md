@@ -48,9 +48,6 @@ User can select how big maze they want the prim's algorithm to create. After tha
 The goal for time complexity is O(V + E), where V is the number of verticles (path cells) in the maze and E is the number of edges (path cells connected)
 in the graph. 
 
-#### Space
-
-The goal for space complexity is O(V), where V is the total number of verticles.
 
 
 ### Prim's algorithm (modified)
@@ -72,7 +69,7 @@ The goal for time complexity is O(E+V), where E is the total number of edges and
 
 #### Space
 
-The goal for space complexity is O(V), where V is the total number of edges.
+The goal for space complexity is O(E), where E is the total number of edges.
 
 ### Tremaux's
 
@@ -82,7 +79,7 @@ The goal for time complexity is O(V), where V is the total number of verticles (
 
 #### Space
 
-The goal for space complexity is O(V), where V is the total number of edges.
+The goal for space complexity is O(E), where E is the total number of edges.
 
 #### Sources
 
