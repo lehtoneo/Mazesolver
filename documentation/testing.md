@@ -25,8 +25,9 @@ Results:
 | 1000x1000        | 2998000       | 175.41    |
 | 1222x1222        | 5970692       | 304.22    |
 
+![Prim perf](https://github.com/lehtoneo/Mazesolver/blob/master/documentation/pictures/Primperf.png)
 
-The growth is exponential over n and linear over E + V, as expected.
+The growth seems to be exponential over n, as expected.
 
 Re-run: 
 
@@ -48,6 +49,8 @@ Results:
 | 625x625          | 1561250       | 14.2      |
 | 1000x1000        | 2998000       | 37.99    |
 | 1222x1222        | 5970692       | 57.87    |
+
+![Backtracker](https://github.com/lehtoneo/Mazesolver/blob/master/documentation/pictures/Backtrackerperf.png)
 
 The growth is exponential over n and linear over E + V, as expected.
 
@@ -81,6 +84,8 @@ Results:
 | 500x500          | 125000      | 13.4      | 122672 |
 | 600x600          | 180000      | 18.715    | 183658 |
 
+![Trem](https://github.com/lehtoneo/Mazesolver/blob/master/documentation/pictures/Tremperf.png)
+
 It seems that the time is increasing linearly over V, as expected.
 
 Re-run: 
@@ -103,7 +108,10 @@ Results:
 | 500x500          | 125000      | 1.8      | 127102 |
 | 600x600          | 180000      | 2.78    | 178981 |
 
+![WallFollower](https://github.com/lehtoneo/Mazesolver/blob/master/documentation/pictures/WallFollowerperf.png)
+
 It seems that the time is increasing linearly over V, as expected.
+
 
 Re-run: 
 
@@ -123,6 +131,8 @@ Results:
 | 400x400          | 80000       |  5.62     | Shortest |
 | 500x500          | 125000      | 9.44      | Shortest |
 | 600x600          | 180000      | 14.28    | Shortest |
+
+![shortestpath](https://github.com/lehtoneo/Mazesolver/blob/master/documentation/pictures/Shortestpathperf.png)
 
 It seems that the time is increasing linearly over V, as expected.
 
