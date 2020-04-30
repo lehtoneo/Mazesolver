@@ -46,7 +46,9 @@ public class StartController implements Initializable {
             System.out.println("Please provide number");
             return;
         }
-        
+        if(Integer.valueOf(n.getText()) < 11) {
+            return;
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/showMaze.fxml"));
         Parent root = loader.load();
         
