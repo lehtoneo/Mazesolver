@@ -1,13 +1,33 @@
 # Implementation document
 
-## Prim maze creation algorithm 
+## Overview
+The project is written in java. Ui is made with JavaFXML. The mazes generated (and solved) in the project are two dimensional char arrays. "." represents a path cell in a maze and "#" represents a wall cell in a maze. 
+
+The project is structured in 6 different folders: datastructures, mazegeneration, mazesolving, ui, util and fxml. The names are somewhat selfexplanatory. 
+
+Datastructures folder contains ArrayList and LinkedList classes.
+
+Mazegeneration contains 3 classes: Backtracker, Prim and Maze. Prim and Backtracker classes take care of mazegeneration and Maze is only a helper class which is used in the ui implementation. 
+
+Mazesolving contains 3 classes: BFS, Tremaux's and WallFollower. All of these classes take the mazegrid to be solved as a parameter. In addition, all of the classes have solve() method, which solves the maze with the corresponding algorithm. 
+
+Ui has 3 classes aswell: MazesolverUI and two controller classes; ShowMazeController and StartController. MazesolverUI has the Main class of the project. The two controller classes take care of the ui. 
+
+Util folder contains Cell, Node and Random classes. Cell is a helper class, which helps to handle maze verticles. Node is a helper class, which helps the implementation of LinkedList. Random class is only used to create a random integer. 
+
+Fxml folder contains the two fxml files of the ui. 
+
+
+## Pseudo codes and O-analyses
+
+### Prim maze creation algorithm 
 
 
 The algorithm gets n x m sized maze as an input. The maze given to the algorithm is filled with 
 wall character '#'. For the sake of simplicity, 
 all mazes given to the algorithm in the project are sized n x n. 
 
-### Pseudo code
+#### Pseudo code
 
 Frontier of some cell C is a cell with distance 2 from C and it is within the maze and not wall.
 
@@ -29,21 +49,24 @@ Frontier of some cell C is a cell with distance 2 from C and it is within the ma
 The maximum number of verticles in the frontier list is (n^2). The time complexity
 of removing a cell from the list is O(n). Hence the time complexity is O(n*(n^2)) = O(n^3). 
 
-The time complexity can be also expressed as O(E+V).
+Space complexity is O(n^2).
 
- ## Recursive backtracker 
+ ### Recursive backtracker 
  
- ### Pseudo code
+The algorithm gets n x n sized maze as an input. The maze given to the algorithm is filled with wall character '#'. 
+
+ #### Pseudo code
  
  https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker (the second one)
  
  
+ The time complexity is O(E+V), and space complexity is O(n^2)
  
- ## Wall follower
+ ### Wall follower
  
  The implemented wall follower uses "right-hand rule". The algorithm might not work if there are loops in the maze. 
  
- ### Pseudo code
+ #### Pseudo code
  
     Initialize direction as right. 
 
@@ -69,11 +92,13 @@ The time complexity can be also expressed as O(E+V).
     
 The worst case scenario is that the algorithm has to visit every verticle twice. Hence, if we have V verticles in a  maze, the time complexity is  O(2V) = O(V).
 
-## Tremaux's
+The space complexity is O(n^2) where n is the width and height of the maze to be solve. The reason for this is that the algorithm saves the entire maze, including the walls. 
+
+### Tremaux's
 
 The algorithm works with and without loops in the maze.
 
-### Pseudo code
+#### Pseudo code
         
     The algorithm can be in two states: going forward or not going forward (going backwards).
 
@@ -97,12 +122,14 @@ The algorithm works with and without loops in the maze.
                     go back from the cell you first came to the intersection
  
 The worst case scenario is that the algorithm has to visit every verticle twice. Hence, if we have V verticles in a  maze, the time complexity is  O(2V) = O(V).
+
+The space complexity is O(n^2) where n is the width and height of the maze to be solve. The reason for this is that the algorithm saves the entire maze, including the walls. 
  
-## Shortest path algorithm (with BFS)
+### Shortest path algorithm (with BFS)
  
 The algorithm works with and without loops in the maze.
 
-### Pseudo code
+#### Pseudo code
 
     put starting verticle in the stack
 
@@ -119,3 +146,5 @@ The algorithm works with and without loops in the maze.
 
 
 The time complexity of the algorithm is O(V) where V is the number of verticles. It may look like the time complexity is O(v^2) since there is a loop inside a loop, but every verticle has up to 4 verticles you can go to. Hence the upper limit of actions is V + 4V which leads to the time complexity of O(V).  
+
+The space complexity is O(n^2) where n is the width and height of the maze to be solve. The reason for this is that the algorithm saves visited array size of nxn.
