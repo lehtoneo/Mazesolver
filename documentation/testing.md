@@ -2,6 +2,9 @@
 
 ## Unit testing
 
+The UI is not tested with unit tests. It has only been tested manually. 
+
+The test coverage is 95%, but it doesn't take the lack of UI tests into account. The unit tests can be found [here](https://github.com/lehtoneo/Mazesolver/tree/master/mazesolver/src/test/java/fi/lehtoneo/mazesolver). 
 
 
 ## Performance testing
