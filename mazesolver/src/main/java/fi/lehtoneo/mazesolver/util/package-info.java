@@ -1,4 +1,4 @@
 /**
- * Helper classes
+ * Utils
 */
 package fi.lehtoneo.mazesolver.util;
