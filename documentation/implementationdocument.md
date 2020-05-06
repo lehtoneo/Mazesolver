@@ -3,13 +3,13 @@
 ## Overview
 The project is written in java. Ui is made with JavaFXML. The mazes generated (and solved) in the project are two dimensional char arrays. "." represents a path cell in a maze and "#" represents a wall cell in a maze. 
 
-The project is structured in 6 different folders: datastructures, mazegeneration, mazesolving, ui, util and fxml. The names are somewhat selfexplanatory. 
+The project is structured into 6 different folders: datastructures, mazegeneration, mazesolving, ui, util and fxml. The names are somewhat selfexplanatory. 
 
 Datastructures folder contains ArrayList and LinkedList classes.
 
 Mazegeneration contains 3 classes: Backtracker, Prim and Maze. Prim and Backtracker classes take care of mazegeneration and Maze is only a helper class which is used in the ui implementation. 
 
-Mazesolving contains 3 classes: BFS, Tremaux's and WallFollower. All of these classes take the mazegrid to be solved as a parameter. In addition, all of the classes have solve() method, which solves the maze with the corresponding algorithm. 
+Mazesolving contains 3 classes: BFS, Tremaux's and WallFollower. All of these classes take the mazegrid to be solved as a parameter. In addition, all of the classes have solve() method, which solves the maze with the corresponding algorithm. In all of the solve()-methods, the order in which the algorithm "visited" the cell, is saved into an ArrayList.
 
 Ui has 3 classes aswell: MazesolverUI and two controller classes; ShowMazeController and StartController. MazesolverUI has the Main class of the project. The two controller classes take care of the ui. 
 
