@@ -3,6 +3,7 @@
 ## Overview
 The project is written in java. Ui is made with JavaFXML. The mazes generated (and solved) in the project are two dimensional char arrays. "." represents a path cell in a maze and "#" represents a wall cell in a maze. 
 
+### Structure
 The project is structured into 6 different folders: datastructures, mazegeneration, mazesolving, ui, util and fxml. The names are somewhat selfexplanatory. 
 
 Datastructures folder contains ArrayList and LinkedList classes.
@@ -16,6 +17,13 @@ Ui has 3 classes aswell: MazesolverUI and two controller classes; ShowMazeContro
 Util folder contains Cell, Node and Random classes. Cell is a helper class, which helps to handle maze verticles. Node is a helper class, which helps the implementation of LinkedList. Random class is only used to create a random integer. 
 
 Fxml folder contains the two fxml files of the ui. 
+
+### How it works (in a nutshell)
+As said above, a maze is saved as two dimensional nxn array where "." represents a path cell in a maze and "#" represents a wall cell in a maze. When selecting maze size and clicking ok, a maze is generated with prim's algorithm. The maze is then "drawn" like this: a GridPane with the size of nxn is created. All of the cells of the GridPane are filled with Panes of which backgrounds are colored as black or white, depending on if the corresponding maze cell is wall or path.
+
+When the maze is drawn and user has selected start and endpoints, when clicking solve, the start and endpoints are given to each of the algorithms and the algorithms solve the maze. When it is solved, the routelists of the algorithms are saved. 
+
+Now when the routelists are saved and user clicks some of the "show route" buttons, the cells from the routelist are searched from the grid and saved to a list of panes. This list of panes is then given to animateRoute()-method, which color's the panes in order. 
 
 
 ## Pseudo codes and O-analyses
@@ -148,6 +156,12 @@ The algorithm works with and without loops in the maze.
 The time complexity of the algorithm is O(V) where V is the number of verticles. It may look like the time complexity is O(v^2) since there is a loop inside a loop, but every verticle has up to 4 verticles you can go to. Hence the upper limit of actions is V + 4V which leads to the time complexity of O(V).  
 
 The space complexity is O(n^2) where n is the width and height of the maze to be solve. The reason for this is that the algorithm saves visited array size of nxn.
+
+## Possible improvements
+
+The ShowMazeController is somewhat long. It could be divided into seperate classes. 
+
+Some of the algorithms could be implemented more elegantly for instance tremaux's algorithm.
 
 #### Sources
 - https://en.wikipedia.org/wiki/Maze_solving_algorithm#Tr%C3%A9maux's_algorithm
