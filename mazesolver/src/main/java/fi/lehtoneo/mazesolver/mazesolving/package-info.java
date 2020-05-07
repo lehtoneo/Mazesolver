@@ -1,4 +1,4 @@
 /**
- * Mazesolving algorithms
+ * Maze solving algorithms
 */
 package fi.lehtoneo.mazesolver.mazesolving;

@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class MazesolverUi extends Application {
     
     
-    /*
+    /**
     * Loads and shows the starting screen for user
     */
     @Override

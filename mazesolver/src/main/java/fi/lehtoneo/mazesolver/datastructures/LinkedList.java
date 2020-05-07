@@ -2,6 +2,10 @@ package fi.lehtoneo.mazesolver.datastructures;
 
 import fi.lehtoneo.mazesolver.util.Node;
 
+/**
+* Linkedlist data structure
+ * @param <T> type of objects saved to the list
+*/
 public class LinkedList<T> {
     
     private Node first;
@@ -13,6 +17,10 @@ public class LinkedList<T> {
         size = 0;
     }
     
+    /**
+    * Adds an object at the end of the list
+     * @param t is the object added to the list
+    */
     public void add(T t) {
         
         size++;
@@ -30,7 +38,10 @@ public class LinkedList<T> {
         
     }
     
-    
+    /**
+    * Adds an object at the beginning of the list
+     * @param t is the object added to the list
+    */
     public void push(T t) {
         size++;
         
@@ -46,7 +57,10 @@ public class LinkedList<T> {
         
     }
     
-    
+    /**
+    * Removes on object from the list
+     * @param i index of the object to be removed
+    */
     public void remove(int i) {
         int j = 0;
         
@@ -84,14 +98,20 @@ public class LinkedList<T> {
         
     }
     
-    
+    /**
+    * Removes first object from the list
+     * 
+    */
     public void removeFirst() {
         
         first = first.next;
         size--;
         
     }
-    
+    /**
+    * Removes and returns first object from the list
+     * @return first object from the list
+    */
     public T pop() {
         T toReturn = (T) first.value;
         first = first.next;
@@ -99,6 +119,10 @@ public class LinkedList<T> {
         return toReturn;
     }
     
+    /**
+    * Removes last object from the list
+     *
+    */
     public void removeLast() {
         int j = 0;
         Node<T> curr = first;
@@ -114,7 +138,11 @@ public class LinkedList<T> {
         size--;
     }
 
-    
+    /**
+    * Gets an object from the list
+     * @param i index of the object to be returned
+     * @return object with index i
+    */
     public T get(int i) {
         
         int j = 0;

@@ -222,8 +222,8 @@ public class ShowMazeController implements Initializable {
     
     
     
-    /*
-    * Creates a new maze
+    /**
+    * Handles create new prim button
     */
     @FXML
     private void createNewPrim(ActionEvent e) {
@@ -232,6 +232,9 @@ public class ShowMazeController implements Initializable {
         
     }
     
+    /**
+     * Handles create new bt button
+     */
     @FXML
     private void createNewBt(ActionEvent e) {
         createBacktrackerMaze(m.getGrid().length, m.getGrid().length);
@@ -297,7 +300,7 @@ public class ShowMazeController implements Initializable {
         wfRoute = wf.getRouteList();
     }
     
-    /*
+    /**
     * Solves the maze with BFS
     */
     
@@ -308,7 +311,7 @@ public class ShowMazeController implements Initializable {
         bfsGoBack = bfs.getGoBackList();
     }
     
-    /*
+    /**
     * Solves the maze with trem
     */
     private void solveTrem() {
@@ -320,39 +323,57 @@ public class ShowMazeController implements Initializable {
     
     
    
-    
+    /**
+     * Handles show WallFollower route button
+     * @param e
+     * @throws InterruptedException 
+     */
     @FXML
     private void showWfRoute(ActionEvent e) throws InterruptedException {
         
         hideButtons();
-        showRoute(wfRoute);
+        ArrayList<Pane> panes = findPanes(wfRoute);
+        animateRoute(panes);
         
         
     }
     
-    
+    /**
+     * Handles show bfs route button
+     * @param e
+     * @throws InterruptedException 
+     */
     @FXML
     private void showBFSRoute(ActionEvent e) throws InterruptedException {
         
         showingBFS = true;
         hideButtons();
-        showRoute(bfsRoute);
+        ArrayList<Pane> panes = findPanes(bfsRoute);
+        animateRoute(panes);
     }
     
+    /**
+     * Handles show Trem route button
+     * @param e
+     * @throws InterruptedException 
+     */
     @FXML
     private void showTremRoute(ActionEvent e) throws InterruptedException {
         
         hideButtons();
-        showRoute(tremRoute);
-        
+        ArrayList<Pane> panes = findPanes(tremRoute);
+        animateRoute(panes);
     }
     
     
     
-    /*
-    * Finds the panes from the grid that corresponds to each cell in the route
-    */
-    public void showRoute(ArrayList<Cell> route) throws InterruptedException {
+    /**
+     * Finds the panes from the grid that corresponds to each cell in aa route list
+     * @param route list of cells that corresponds to the route
+     * @throws InterruptedException 
+     * @return the panes from the grids that corresponds to each cell in the routelist given as a parameter
+     */
+    public ArrayList<Pane> findPanes(ArrayList<Cell> route) throws InterruptedException {
         showing = true;
         ObservableList<Node> children = mazegrid.getChildren();
         int n = m.getGrid().length;
@@ -364,13 +385,15 @@ public class ShowMazeController implements Initializable {
             Pane p = (Pane) (children.get(c.getRow()*n+c.getColumn()));
             listOfPanes.add(p);
         }
-        
-        
-        animateRoute(listOfPanes);
-        
+        return listOfPanes;
         
     }
     
+    /**
+     * Animates the route
+     * @param panes list of panes which should be colored
+     * @throws InterruptedException 
+     */
     private void animateRoute(ArrayList<Pane> panes) throws InterruptedException {
         i = 1;
 
@@ -414,6 +437,10 @@ public class ShowMazeController implements Initializable {
         pause.play();
     }
     
+    /**
+     * Handles the animation of bfs gobacklist
+     * @throws InterruptedException 
+     */
     private void animateTheRouteBFSFound() throws InterruptedException {
         i = 1;
         ArrayList<Pane> panes = new ArrayList();
@@ -445,7 +472,7 @@ public class ShowMazeController implements Initializable {
         pause.play();
     }
     
-    /*
+    /**
     * Resets the path after some route is shown
     */
     @FXML

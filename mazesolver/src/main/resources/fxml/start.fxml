@@ -7,7 +7,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.lehtoneo.mazesolver.ui.controllers.StartController">
    <children>
-      <Text layoutX="240.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How big maze do you want to make?  (n x n)" wrappingWidth="119.47010803222656" />
+      <Text layoutX="240.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please choose maze size:  (n x n)" wrappingWidth="119.47010803222656" />
       <Text layoutX="237.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="n:" />
       <TextField fx:id="n" layoutX="265.0" layoutY="178.0" prefHeight="25.0" prefWidth="49.0" />
       <Button layoutX="274.0" layoutY="232.0" mnemonicParsing="false" onAction="#onOkClick" text="Ok" />

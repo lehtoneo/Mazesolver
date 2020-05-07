@@ -29,9 +29,10 @@ public class StartController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
     }    
-    /*
-    * Handles ok click
-    */
+    /**
+     * Handles ok click
+     * @throws Exception 
+     */
     @FXML
     public void onOkClick() throws Exception {
         

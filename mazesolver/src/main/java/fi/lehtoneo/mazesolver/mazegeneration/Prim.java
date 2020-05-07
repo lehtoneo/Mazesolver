@@ -27,18 +27,6 @@ public class Prim {
         init();
     }
     
-    /**
-     * This constructor is only used for the performance tests
-     * @param rows number of rows in the generated maze
-     * @param columns number of columns in the generated maze
-     * @param seed random seed for generation 
-     */
-    public Prim(int rows, int columns, long seed) {
-        this.grid = new char[rows][columns];
-        this.seed = seed;
-        isInFrontierList = new boolean[grid.length][grid.length];
-        init();
-    }
     
     /**
      * Prim's algorithm to generate a "perfect" maze

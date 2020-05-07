@@ -19,9 +19,9 @@ public class ArrayList<T> {
     
     /**
     * Adds an object at the end of the list
-     * @param o is the object added to the list
+     * @param t is the object added to the list
     */
-    public void add(T o) {
+    public void add(T t) {
         
         if(lastI+1 == arr.length) {
             T[] temp = (T[])new Object[arr.length*2];
@@ -33,7 +33,7 @@ public class ArrayList<T> {
             arr = temp;
         }
         
-        arr[lastI+1] = o;
+        arr[lastI+1] = t;
         lastI++;
 
     }

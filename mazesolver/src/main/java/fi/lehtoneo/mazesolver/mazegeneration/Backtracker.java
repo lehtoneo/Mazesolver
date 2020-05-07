@@ -4,6 +4,9 @@ import fi.lehtoneo.mazesolver.datastructures.ArrayList;
 import fi.lehtoneo.mazesolver.util.Random;
 import fi.lehtoneo.mazesolver.datastructures.LinkedList;
 import fi.lehtoneo.mazesolver.util.Cell;
+/**
+ * Class to generate a maze with recursive backtracker
+ */
 public class Backtracker {
     
     char[][] grid;
@@ -13,7 +16,7 @@ public class Backtracker {
         init();
     }
     
-    /*
+    /**
     * Generates a maze with recursive backtracker. 
     */
     public void generate() {
@@ -44,8 +47,10 @@ public class Backtracker {
         }
     }
     
-    /*
-    * Connects two cells. In other words removes wall between two cells.
+    /**
+    * Connects two cells. In other words: removes wall between two cells.
+    * @param a first of the two cells two be connected
+    * @param b second of the two cells to be connected
     */
     public void connect(Cell a, Cell b) {
         int ax = a.getRow();
@@ -71,8 +76,11 @@ public class Backtracker {
     }
     
     
-    /*
+    /**
     * Gets unvisited neighbours of a cell.
+    * @param i row of the cell
+    * @param j col of the cell
+    * @return list of unvisited neighbours
     */
     public ArrayList<Cell> getUnvisitedNeigh(int i, int j) {
         ArrayList<Cell> toReturn = new ArrayList();

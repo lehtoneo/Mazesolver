@@ -18,7 +18,7 @@ public class Maze {
     }
     
 
-    /*
+    /**
     *
     * Returns maze as string
     */
